@@ -1,12 +1,16 @@
 package com.wanted_server.Class;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Personal {
 
@@ -52,6 +56,14 @@ public class Personal {
     @Column
     private String address;
 
+    @OneToMany(mappedBy = "personal")
+    private List<Posting> postings = new ArrayList<>();
+
+    public void setTeam(Team team) {
+        this.team = team;
+        team.getPersonals().add(this);
+    }
+
     public Personal(PersonalDto personalDto) {
         this.stringId = personalDto.getStringId();
         this.pwd = personalDto.getPwd();
@@ -67,18 +79,27 @@ public class Personal {
         this.career = personalDto.getCareer();
     }
 
-    public void update(PersonalDto personalDto) {
-        this.stringId = personalDto.getStringId();
-        this.pwd = personalDto.getPwd();
-        this.team = personalDto.getTeam();
-        this.nickname = personalDto.getNickname();
-        this.img = personalDto.getImg();
-        this.school = personalDto.getSchool();
-        this.major = personalDto.getMajor();
-        this.grade = personalDto.getGrade();
-        this.age = personalDto.getAge();
-        this.gender = personalDto.getGender();
-        this.address = personalDto.getAddress();
-        this.career = personalDto.getCareer();
+    @Override
+    public String toString() {
+        return "Personal{" +
+                "id=" + id +
+                ", stringId='" + stringId + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", img='" + img + '\'' +
+                ", school='" + school + '\'' +
+                ", major='" + major + '\'' +
+                ", grade=" + grade +
+                ", age=" + age +
+                ", gender=" + gender +
+                ", career='" + career + '\'' +
+                ", address='" + address + '\'' +
+                ", postings=" + postings + '\'' +
+                ", team.id=" + getTeam().getId() +
+                '}';
     }
+
+    public void update(PersonalDto personalDto) {
+    }
+
 }

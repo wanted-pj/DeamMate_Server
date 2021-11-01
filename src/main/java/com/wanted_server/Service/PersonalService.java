@@ -20,6 +20,6 @@ public class PersonalService {
                 () -> new IllegalArgumentException("해당 멤버 번호가 존재하지 않습니다.")
         );
         personal.update(personalDto);
-        return personal.getMem_num();
+        return personal.getId();
     }
 }
