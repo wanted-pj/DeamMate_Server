@@ -6,8 +6,16 @@ import javax.persistence.Column;
 
 @Getter
 public class PersonalDto {
-    private Long mem_num;
-    private String id;
+    private String stringId;
     private String pwd;
+    private Team team;
     private String nickname;
+    private String img;
+    private String school;
+    private String major;
+    private int grade;
+    private int age;
+    private int gender;
+    private String address;
+    private String career;
 }
