@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -12,10 +14,11 @@ public class Personal {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long mem_num;
+    @Column(name = "personal_id")
+    private Long id;
 
     @Column(nullable = false)
-    private String id;
+    private String stringId;
 
     @Column(nullable = false)
     private String pwd;
@@ -23,15 +26,11 @@ public class Personal {
     @Column(nullable = false)
     private String nickname;
 
-    public Personal(PersonalDto personalDto) {
-        this.id = personalDto.getId();
-        this.pwd = personalDto.getPwd();
-        this.nickname = personalDto.getNickname();
-    }
+    @OneToMany(mappedBy = "personal")
+    private List<Posting> postings = new ArrayList<>();
 
-    public void update(PersonalDto personalDto) {
-        this.id = personalDto.getId();
-        this.pwd = personalDto.getPwd();
-        this.nickname = personalDto.getNickname();
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
 }
