@@ -1,12 +1,8 @@
 package com.wanted_server.Class;
 
-<<<<<<< HEAD
-public class Team {
-
-}
-=======
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
+@Setter
 public class Team {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,5 +35,5 @@ public class Team {
         this.leader = teamDto.getLeader();
     }
 
+
 }
->>>>>>> 080ef6798ce6d0d6328c8caa5de7bf29d7347692
