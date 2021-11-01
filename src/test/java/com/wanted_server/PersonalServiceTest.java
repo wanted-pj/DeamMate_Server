@@ -32,10 +32,7 @@ class PersonalServiceTest {
     @Test
     @Rollback(value = false)
     public void 회원가입() throws Exception {
-        // given
-        Team team = new Team();
-        team.setLeader(false);
-
+        // 개인객체 다 만듬
         PersonalDto personalDto1 = new PersonalDto("ggp03016", "1234",
                 "dfas", "adasdsa", "경기대", "경영", 4, 25, 1, "경기도", "개발자");
         PersonalDto personalDto2 = new PersonalDto("ggp03016", "1234",
@@ -46,25 +43,35 @@ class PersonalServiceTest {
         Personal personal1 = new Personal(personalDto1);
         Personal personal2 = new Personal(personalDto2);
         Personal personal3 = new Personal(personalDto3);
-        personal1.setTeam(team);
-        personal2.setTeam(team);
-        personal3.setTeam(team);
+        Personal addedPersonal1 = personalRepository.save(personal1);
+        Personal addedPersonal2 = personalRepository.save(personal2);
+        Personal addedPersonal3 = personalRepository.save(personal3);
 
-        personalRepository.save(personal2);
-        personalRepository.save(personal3);
+        // 한 개인이 팀생성 (팀 생성 서비스)
+        Personal findPersonal = personalRepository.findById(addedPersonal1.getId()).get();
+        Team team = new Team();
+        team.setLeaderId(findPersonal.getId());
+        findPersonal.setTeam(team);
 
-        // when
-        Personal addedPersonal = personalRepository.save(personal1);
+        // 다른 회원들이 팀 수락을 요청
+        Personal findPersonal2 = personalRepository.findById(addedPersonal2.getId()).get();
+        Personal findPersonal3 = personalRepository.findById(addedPersonal3.getId()).get();
+
+        findPersonal2.setTeam(team);
+        findPersonal3.setTeam(team);
+
         teamRepository.save(team);
 
-        Personal findPersonal = personalRepository.findById(addedPersonal.getId()).get();
+        // when
+        // 다시 개인의 팀원을 조회
+        Personal reFindPersonal = personalRepository.findById(personal1.getId()).get();
 
         // then
         System.out.println("아무렇게나");
         for (Personal personal : findPersonal.getTeam().getPersonals()) {
-            System.out.println("Id: " + personal.getId());
+            System.out.println("Id: " + personal);
         }
-        assertEquals(addedPersonal, findPersonal);
+        assertEquals(personal1, reFindPersonal);
     }
 
 }

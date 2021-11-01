@@ -1,5 +1,6 @@
 package com.wanted_server.Class;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Setter
 public class Personal {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "personal_id")
     private Long id;
 
     @Column(nullable = false)
@@ -58,6 +59,11 @@ public class Personal {
     @OneToMany(mappedBy = "personal")
     private List<Posting> postings = new ArrayList<>();
 
+    public void setTeam(Team team) {
+        this.team = team;
+        team.getPersonals().add(this);
+    }
+
     public Personal(PersonalDto personalDto) {
         this.stringId = personalDto.getStringId();
         this.pwd = personalDto.getPwd();
@@ -88,7 +94,8 @@ public class Personal {
                 ", gender=" + gender +
                 ", career='" + career + '\'' +
                 ", address='" + address + '\'' +
-                ", postings=" + postings +
+                ", postings=" + postings + '\'' +
+                ", team.id=" + getTeam().getId() +
                 '}';
     }
 

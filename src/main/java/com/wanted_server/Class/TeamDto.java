@@ -7,6 +7,4 @@ import java.util.List;
 
 @Getter
 public class TeamDto {
-    private List<Personal> personals = new ArrayList<>();
-    private Boolean leader;
 }

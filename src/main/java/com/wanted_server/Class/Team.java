@@ -23,17 +23,6 @@ public class Team {
     private List<Personal> personals = new ArrayList<>();
 
     @Column(nullable = false)
-    private Boolean leader;
-
-    public Team(TeamDto teamDto) {
-        this.personals = teamDto.getPersonals();
-        this.leader = teamDto.getLeader();
-    }
-
-    public void update(TeamDto teamDto) {
-        this.personals = teamDto.getPersonals();
-        this.leader = teamDto.getLeader();
-    }
-
+    private Long leaderId;
 
 }
