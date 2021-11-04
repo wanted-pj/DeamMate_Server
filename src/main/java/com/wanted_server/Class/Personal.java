@@ -1,6 +1,6 @@
 package com.wanted_server.Class;
 
-import lombok.AccessLevel;
+import com.wanted_server.Dto.PersonalDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
+@Setter
 public class Personal {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "personal_id")
     private Long id;
 
     @Column(nullable = false)
@@ -25,9 +25,8 @@ public class Personal {
     @Column(nullable = false)
     private String pwd;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    private List<PersonalTeam> personalTeams = new ArrayList<>();
 
     @Column(nullable = false)
     private String nickname;
@@ -59,47 +58,37 @@ public class Personal {
     @OneToMany(mappedBy = "personal")
     private List<Posting> postings = new ArrayList<>();
 
-    public void setTeam(Team team) {
-        this.team = team;
-        team.getPersonals().add(this);
+    public void addPersonalTeam(PersonalTeam personalTeam) {
+        personalTeams.add(personalTeam);
+        personalTeam.setPersonal(this);
     }
 
     public Personal(PersonalDto personalDto) {
-        this.stringId = personalDto.getStringId();
-        this.pwd = personalDto.getPwd();
-        this.team = personalDto.getTeam();
-        this.nickname = personalDto.getNickname();
-        this.img = personalDto.getImg();
-        this.school = personalDto.getSchool();
-        this.major = personalDto.getMajor();
-        this.grade = personalDto.getGrade();
-        this.age = personalDto.getAge();
-        this.gender = personalDto.getGender();
-        this.address = personalDto.getAddress();
-        this.career = personalDto.getCareer();
-    }
-
-    @Override
-    public String toString() {
-        return "Personal{" +
-                "id=" + id +
-                ", stringId='" + stringId + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", img='" + img + '\'' +
-                ", school='" + school + '\'' +
-                ", major='" + major + '\'' +
-                ", grade=" + grade +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", career='" + career + '\'' +
-                ", address='" + address + '\'' +
-                ", postings=" + postings + '\'' +
-                ", team.id=" + getTeam().getId() +
-                '}';
+        this.stringId = personalDto.stringId;
+        this.pwd = personalDto.pwd;
+        this.nickname = personalDto.nickname;
+        this.img = personalDto.img;
+        this.school = personalDto.school;
+        this.major = personalDto.major;
+        this.grade = personalDto.grade;
+        this.age = personalDto.age;
+        this.gender = personalDto.gender;
+        this.career = personalDto.career;
+        this.address = personalDto.address;
     }
 
     public void update(PersonalDto personalDto) {
+        this.stringId = personalDto.stringId;
+        this.pwd = personalDto.pwd;
+        this.nickname = personalDto.nickname;
+        this.img = personalDto.img;
+        this.school = personalDto.school;
+        this.major = personalDto.major;
+        this.grade = personalDto.grade;
+        this.age = personalDto.age;
+        this.gender = personalDto.gender;
+        this.career = personalDto.career;
+        this.address = personalDto.address;
     }
 
 }
