@@ -7,9 +7,11 @@ import com.wanted_server.Repository.PostingRepository;
 import com.wanted_server.Repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TeamService {
 
     private final PersonalRepository personalRepository;
@@ -18,9 +20,9 @@ public class TeamService {
     private final ConnectRepository connectRepository;
 
     // 팀생성
-    public Team makeTeam(Long leaderId, Long postingId) {
-        Personal leader = personalRepository.findOne(leaderId);
+    public Team makeTeam(Long postingId) {
         Posting posting = postingRepository.findById(postingId).get();
+        Personal leader = posting.getPersonal();
 
         // Personal에서, PersonalTeam에서 처리
         PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(leader);

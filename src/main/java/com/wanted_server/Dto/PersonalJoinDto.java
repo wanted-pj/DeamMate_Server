@@ -1,11 +1,9 @@
 package com.wanted_server.Dto;
 
-import com.wanted_server.Class.Team;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-public class PersonalDto {
+public class PersonalJoinDto {
     public String stringId;
     public String pwd;
     public String nickname;
@@ -18,7 +16,7 @@ public class PersonalDto {
     public String address;
     public String career;
 
-    public PersonalDto(String stringId, String pwd, String nickname, String img, String school, String major, int grade, int age, int gender, String address, String career) {
+    public PersonalJoinDto(String stringId, String pwd, String nickname, String img, String school, String major, int grade, int age, int gender, String address, String career) {
         this.stringId = stringId;
         this.pwd = pwd;
         this.nickname = nickname;

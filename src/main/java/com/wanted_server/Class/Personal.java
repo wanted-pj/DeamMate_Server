@@ -1,6 +1,7 @@
 package com.wanted_server.Class;
 
-import com.wanted_server.Dto.PersonalDto;
+import com.wanted_server.Dto.PersonalJoinDto;
+import com.wanted_server.Dto.PersonalUpdateDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -63,32 +64,32 @@ public class Personal {
         personalTeam.setPersonal(this);
     }
 
-    public Personal(PersonalDto personalDto) {
-        this.stringId = personalDto.stringId;
-        this.pwd = personalDto.pwd;
-        this.nickname = personalDto.nickname;
-        this.img = personalDto.img;
-        this.school = personalDto.school;
-        this.major = personalDto.major;
-        this.grade = personalDto.grade;
-        this.age = personalDto.age;
-        this.gender = personalDto.gender;
-        this.career = personalDto.career;
-        this.address = personalDto.address;
+    public Personal(PersonalJoinDto personalJoinDto) {
+        this.stringId = personalJoinDto.stringId;
+        this.pwd = personalJoinDto.pwd;
+        this.nickname = personalJoinDto.nickname;
+        this.img = personalJoinDto.img;
+        this.school = personalJoinDto.school;
+        this.major = personalJoinDto.major;
+        this.grade = personalJoinDto.grade;
+        this.age = personalJoinDto.age;
+        this.gender = personalJoinDto.gender;
+        this.career = personalJoinDto.career;
+        this.address = personalJoinDto.address;
     }
 
-    public void update(PersonalDto personalDto) {
-        this.stringId = personalDto.stringId;
-        this.pwd = personalDto.pwd;
-        this.nickname = personalDto.nickname;
-        this.img = personalDto.img;
-        this.school = personalDto.school;
-        this.major = personalDto.major;
-        this.grade = personalDto.grade;
-        this.age = personalDto.age;
-        this.gender = personalDto.gender;
-        this.career = personalDto.career;
-        this.address = personalDto.address;
+    public void update(PersonalUpdateDto personalUpdateDto) {
+        this.stringId = personalUpdateDto.stringId;
+        this.pwd = personalUpdateDto.pwd;
+        this.nickname = personalUpdateDto.nickname;
+        this.img = personalUpdateDto.img;
+        this.school = personalUpdateDto.school;
+        this.major = personalUpdateDto.major;
+        this.grade = personalUpdateDto.grade;
+        this.age = personalUpdateDto.age;
+        this.gender = personalUpdateDto.gender;
+        this.career = personalUpdateDto.career;
+        this.address = personalUpdateDto.address;
     }
 
 }

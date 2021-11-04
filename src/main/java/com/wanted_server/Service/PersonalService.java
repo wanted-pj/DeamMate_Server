@@ -1,13 +1,13 @@
 package com.wanted_server.Service;
 
 import com.wanted_server.Class.Personal;
-import com.wanted_server.Dto.PersonalDto;
+import com.wanted_server.Dto.PersonalJoinDto;
+import com.wanted_server.Dto.PersonalUpdateDto;
 import com.wanted_server.Repository.PersonalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Service
@@ -27,6 +27,7 @@ public class PersonalService {
         return personal.getId();
     }
 
+    // 회원 중복 조회
     private void validateDuplicateException(Personal personal) {
         List<Personal> findPersonal = personalRepository.findByStringId(personal.getStringId());
         if(!findPersonal.isEmpty()){
@@ -46,9 +47,9 @@ public class PersonalService {
 
     // 회원정보 변경
     @Transactional
-    public Long update(Long personalId, PersonalDto personalDto) {
+    public Long update(Long personalId, PersonalUpdateDto personalUpdateDto) {
         Personal personal = personalRepository.findOne(personalId);
-        personal.update(personalDto);
+        personal.update(personalUpdateDto);
         return personal.getId();
     }
 

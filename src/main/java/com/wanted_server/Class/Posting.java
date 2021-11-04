@@ -1,5 +1,7 @@
 package com.wanted_server.Class;
 
+import com.wanted_server.Dto.PostingCreateDto;
+import com.wanted_server.Dto.PostingUpdateDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,6 +39,20 @@ public class Posting {
 
     @OneToOne(mappedBy = "posting", fetch = FetchType.LAZY)
     private Team team;
+
+    public Posting(PostingCreateDto postingCreateDto){
+        this.title = postingCreateDto.getTitle();
+        this.content = postingCreateDto.getContent();
+        this.postingTime = postingCreateDto.getPostingTime();
+        this.category = postingCreateDto.getCategory();
+    }
+
+    public void update(PostingUpdateDto postingUpdateDto) {
+        this.title = postingUpdateDto.getTitle();
+        this.content = postingUpdateDto.getContent();
+        this.postingTime = postingUpdateDto.getPostingTime();
+        this.category = postingUpdateDto.getCategory();
+    }
 
     public void setPersonal(Personal personal) {
         this.personal = personal;
