@@ -1,5 +1,7 @@
 package com.wanted_server.Class;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.wanted_server.Dto.PersonalJoinDto;
 import com.wanted_server.Dto.PersonalUpdateDto;
 import lombok.Getter;
@@ -14,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Personal {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

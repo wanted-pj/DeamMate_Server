@@ -22,26 +22,35 @@ public class TeamService {
     // 팀생성
     public Team makeTeam(Long postingId) {
         Posting posting = postingRepository.findById(postingId).get();
-        Personal leader = posting.getPersonal();
+        // 팀생성 -> 리더 아이디 지정 및 포스팅과 팀의 매핑설정
+        Team team = Team.createTeam(posting);
 
         // Personal에서, PersonalTeam에서 처리
-        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(leader);
+        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(posting.getPersonal());
+        personalTeam.setTeam(team);
 
-        // PersonalTeam을 바탕으로 팀생성
-        Team team = Team.createTeam(personalTeam, posting);
+        teamRepository.save(team);
+
         return team;
     }
 
     // 팀 조인
-    public Team joinTeam(Long senderId, Long connectId) {
-        Personal sender = personalRepository.findOne(senderId);
+    public Team joinTeam(Long connectId) {
         Connect connect = connectRepository.findById(connectId).get();
+        Personal sender = personalRepository.findOne(connect.getSenderId());
         Team team = connect.getPosting().getTeam();
 
         // Personal에서, PersonalTeam에서 처리
         PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(sender);
+        personalTeam.setTeam(team); // 팀 조인
 
-        // 팀 조인
-        return team.joinTeam(personalTeam);
+        teamRepository.save(team);
+
+        return team;
     }
+
+    // 팀 탈퇴
+
+    // 팀 삭제
+
 }

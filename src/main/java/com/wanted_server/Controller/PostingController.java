@@ -16,24 +16,28 @@ public class PostingController {
 
     private final PostingService postingService;
 
-    @GetMapping("/") // 전체 포스팅 조회
+    // 전체 포스팅 조회
+    @GetMapping("/posting")
     public List<Posting> getPostings() {
         return postingService.findPostings();
     }
 
-    @PostMapping("/posting")
-    public Posting createPosting(@RequestBody PostingCreateDto postingCreateDto, @RequestBody Long personalId) {
+    // 사람 Id를 전달받아서 posting 만들기
+    @PostMapping("/posting/{personalId}")
+    public Posting createPosting(@RequestBody PostingCreateDto postingCreateDto, @PathVariable Long personalId) {
         Posting posting = new Posting(postingCreateDto);
         postingService.make(posting, personalId);
         return posting;
     }
 
-    @PutMapping("/Posting/{postingId}")
+    // 포스트 Id를 전달받아서 posting 수정하기
+    @PutMapping("/posting/{postingId}")
     public Long updatePosting(@PathVariable Long postingId, @RequestBody PostingUpdateDto postingUpdateDto) {
         return postingService.update(postingId, postingUpdateDto);
     }
 
-    @DeleteMapping("/Posting/{postingId}")
+    // 포스팅아이디를 전달받아서 포스팅 삭제하기
+    @DeleteMapping("/posting/{postingId}")
     public Long deletePosting(@PathVariable Long postingId) {
         postingService.delete(postingId);
         return postingId;
