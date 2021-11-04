@@ -1,11 +1,10 @@
 package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Team;
+import com.wanted_server.Dto.PostingUpdateDto;
 import com.wanted_server.Service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,8 +24,17 @@ public class TeamController {
     }
 
     // 팀 변경(참여)
+    @PutMapping("/team/join/{senderId}")
+    public Team joinTeam(@PathVariable Long senderId, @RequestBody Long connectId) {
+        return teamService.joinTeam(senderId, connectId);
+    }
 
     // 팀 변경(강퇴)
+//    @PutMapping("/team/out/{outerId}")
+//    public Team outTeam(@PathVariable Long outerId, @RequestBody Long leaderId) {
+//        return teamService.joinTeam(outerId, leaderId);
+//
+//    }
 
     // 팀 삭제
 

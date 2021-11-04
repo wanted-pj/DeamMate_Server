@@ -31,7 +31,6 @@ public class PostingService {
     @Transactional(readOnly = true)
     public List<Posting> findPostings() {
         return postingRepository.findAll();
-
     }
 
     // 포스트 수정

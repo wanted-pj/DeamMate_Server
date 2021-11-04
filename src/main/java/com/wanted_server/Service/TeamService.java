@@ -44,4 +44,9 @@ public class TeamService {
         // 팀 조인
         return team.joinTeam(personalTeam);
     }
+
+    // 팀 탈퇴
+
+    // 팀 삭제
+
 }

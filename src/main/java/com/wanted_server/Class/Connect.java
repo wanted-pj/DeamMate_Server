@@ -1,5 +1,7 @@
 package com.wanted_server.Class;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Connect {
 
     @Id
@@ -22,4 +25,9 @@ public class Connect {
     @Column(nullable = false)
     private Long senderId;
 
+    // 커넥트 생성시 포스팅과 연결
+    public void setPosting(Posting posting) {
+        this.posting = posting;
+        posting.getConnects().add(this);
+    }
 }

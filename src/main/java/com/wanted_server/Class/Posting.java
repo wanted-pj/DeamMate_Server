@@ -1,5 +1,7 @@
 package com.wanted_server.Class;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.wanted_server.Dto.PostingCreateDto;
 import com.wanted_server.Dto.PostingUpdateDto;
 import lombok.Getter;
@@ -15,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Posting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -54,12 +57,14 @@ public class Posting {
         this.category = postingUpdateDto.getCategory();
     }
 
+    // 포스팅을 만들 때, 사람과 관계 설정
     public void setPersonal(Personal personal) {
         this.personal = personal;
         personal.getPostings().add(this);
     }
 
-    public void setPersonalTeamId(Team team) {
+    // 팀생성할 때 포스팅과 팀 관계 설정
+    public void setTeam(Team team) {
         this.team = team;
         team.setPosting(this);
     }
