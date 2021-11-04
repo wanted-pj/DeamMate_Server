@@ -15,8 +15,11 @@ public class Connect {
     @Column(name = "connect_id")
     private Long id;
 
-//    private Personal leader;
-//
-//    private Personal participant;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "posting_id")
+    private Posting posting;
+
+    @Column(nullable = false)
+    private Long senderId;
 
 }

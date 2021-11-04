@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -19,10 +17,27 @@ public class Team {
     @Column(name = "team_id")
     private Long id;
 
-    @OneToMany(mappedBy = "team")
-    private List<Personal> personals = new ArrayList<>();
-
     @Column(nullable = false)
     private Long leaderId;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "posting_id")
+    private Posting posting;
+
+    static public Team createTeam(PersonalTeam leaderPersonalTeam, Posting posting) {
+        // 팀 생성
+        Team team = new Team();
+        team.setLeaderId(leaderPersonalTeam.getPersonal().getId()); // 리더Id 지정
+        leaderPersonalTeam.setTeam(team);
+
+        // 팀생성시
+        posting.setTeam(team);
+
+        return team;
+    }
+
+    public Team joinTeam(PersonalTeam senderPersonalTeam){
+        senderPersonalTeam.setTeam(this);
+        return this;
+    }
 }

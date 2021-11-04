@@ -13,6 +13,7 @@ public class WantedServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(WantedServerApplication.class, args);
     }
+
 }
 
 
