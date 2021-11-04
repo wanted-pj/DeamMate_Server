@@ -22,14 +22,14 @@ public class PersonalService {
      */
     @Transactional
     public Long join(Personal personal){
-        validateDuplicateException(personal);
+        validateDuplicateException(personal.getStringId());
         personalRepository.save(personal);
         return personal.getId();
     }
 
     // 회원 중복 조회
-    private void validateDuplicateException(Personal personal) {
-        List<Personal> findPersonal = personalRepository.findByStringId(personal.getStringId());
+    public void validateDuplicateException(String stringId) {
+        List<Personal> findPersonal = personalRepository.findByStringId(stringId);
         if(!findPersonal.isEmpty()){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }

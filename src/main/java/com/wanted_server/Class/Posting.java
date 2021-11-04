@@ -46,15 +46,19 @@ public class Posting {
     public Posting(PostingCreateDto postingCreateDto){
         this.title = postingCreateDto.getTitle();
         this.content = postingCreateDto.getContent();
-        this.postingTime = postingCreateDto.getPostingTime();
         this.category = postingCreateDto.getCategory();
+
+        // 시간은 나중에 설정
+        this.postingTime = LocalDateTime.now();
     }
 
     public void update(PostingUpdateDto postingUpdateDto) {
         this.title = postingUpdateDto.getTitle();
         this.content = postingUpdateDto.getContent();
-        this.postingTime = postingUpdateDto.getPostingTime();
         this.category = postingUpdateDto.getCategory();
+
+        // 업데이트 시간으로 시간 설정
+        this.postingTime = LocalDateTime.now();
     }
 
     // 포스팅을 만들 때, 사람과 관계 설정
@@ -63,9 +67,4 @@ public class Posting {
         personal.getPostings().add(this);
     }
 
-    // 팀생성할 때 포스팅과 팀 관계 설정
-    public void setTeam(Team team) {
-        this.team = team;
-        team.setPosting(this);
-    }
 }

@@ -17,16 +17,16 @@ public class TeamController {
 //    public List<Team> getTeams() { return teamService}
 
     // 팀 생성 (
-    @PostMapping("/team")
-    public Team createTeam(@RequestBody Long postingId) {
+    @PostMapping("/team/{postingId}")
+    public Team createTeam(@PathVariable Long postingId) {
         Team team = teamService.makeTeam(postingId);
         return team;
     }
 
     // 팀 변경(참여)
-    @PutMapping("/team/join/{senderId}")
-    public Team joinTeam(@PathVariable Long senderId, @RequestBody Long connectId) {
-        return teamService.joinTeam(senderId, connectId);
+    @PutMapping("/team/join/{connectId}")
+    public Team joinTeam(@PathVariable Long connectId) {
+        return teamService.joinTeam(connectId);
     }
 
     // 팀 변경(강퇴)

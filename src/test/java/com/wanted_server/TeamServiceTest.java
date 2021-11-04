@@ -26,7 +26,7 @@ public class TeamServiceTest {
 
     @Autowired
     TeamService teamService;
-
+    /*
     @Test
     @Rollback(value = false)
     public void 팀생성() throws Exception {
@@ -50,4 +50,6 @@ public class TeamServiceTest {
 
         // result
     }
+
+     */
 }

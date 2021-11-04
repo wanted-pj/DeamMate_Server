@@ -5,9 +5,13 @@ spring:
     username: wanted_admin
     password: d4a1b2c3
 
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         #show_sql: true
