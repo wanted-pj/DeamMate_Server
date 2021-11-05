@@ -1,6 +1,7 @@
 package com.wanted_server.Class;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Team {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "posting_id")
+    @JsonIgnore
     private Posting posting;
 
     static public Team createTeam(Posting posting) {

@@ -1,6 +1,7 @@
 package com.wanted_server.Class;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.wanted_server.Dto.PostingCreateDto;
 import com.wanted_server.Dto.PostingUpdateDto;
@@ -41,6 +42,7 @@ public class Posting {
     private List<Connect> connects = new ArrayList<>();
 
     @OneToOne(mappedBy = "posting", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Team team;
 
     public Posting(PostingCreateDto postingCreateDto){
