@@ -23,6 +23,10 @@ public class PersonalController {
         return personalRepository.findAll();
     }
 
+    @GetMapping("/personal/{id}")
+    public Personal getPersonals(@PathVariable Long id) {
+        return personalService.findOne(id);
+    }
 
     // 학교로 여러개 조회
     @GetMapping("/personal/school")
