@@ -35,6 +35,7 @@ public class PersonalTeam {
     static public PersonalTeam createPersonalTeam(Personal personal) {
         PersonalTeam personalTeam = new PersonalTeam();
         personal.addPersonalTeam(personalTeam);
+        System.out.println("CreatePersonal Team여기: " + personal.getId());
         return personalTeam;
     }
 

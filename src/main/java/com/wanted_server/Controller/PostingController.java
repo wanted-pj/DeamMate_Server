@@ -2,12 +2,14 @@ package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Posting;
 import com.wanted_server.Dto.PostingCreateDto;
+import com.wanted_server.Dto.PostingInfoDto;
 import com.wanted_server.Dto.PostingUpdateDto;
 import com.wanted_server.Repository.PostingRepository;
 import com.wanted_server.Service.PostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -15,8 +17,24 @@ import java.util.List;
 public class PostingController {
 
     private final PostingService postingService;
+    private final PostingRepository postingRepository;
 
     // 전체 포스팅 조회
+//    @GetMapping("/posting")
+//    public List<PostingInfoDto> getPostings() {
+//        List<Posting> postings = postingService.findPostings();
+//        ArrayList<PostingInfoDto> postingInfoDtos = new ArrayList<>();
+//        for (Posting posting : postings) {
+//            postingInfoDtos.add(new PostingInfoDto(
+//                    posting.getTitle(),
+//                    posting.getContent(),
+//                    posting.getCategory(),
+//                    posting.getPostingTime(),
+//                    posting.getPersonal().getId()));
+//        }
+//        return (List<PostingInfoDto>) postingInfoDtos;
+//    }
+
     @GetMapping("/posting")
     public List<Posting> getPostings() {
         return postingService.findPostings();

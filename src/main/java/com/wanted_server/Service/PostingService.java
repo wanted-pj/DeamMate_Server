@@ -23,8 +23,8 @@ public class PostingService {
     public Long make(Posting posting, Long personalId){
         Personal personal = personalRepository.findOne(personalId);
         posting.setPersonal(personal);
-        postingRepository.save(posting);
-        return posting.getId();
+        Posting save = postingRepository.save(posting);
+        return save.getId();
     }
 
     // 전체 포스팅 데이터 가져오기
