@@ -1,5 +1,6 @@
 package com.wanted_server.Class;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -23,6 +24,7 @@ public class PersonalTeam {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_id")
+    @JsonBackReference
     private Personal personal;
 
     @ManyToOne(fetch = FetchType.LAZY)
