@@ -28,6 +28,7 @@ public class TeamService {
         // Personal에서, PersonalTeam에서 처리
         PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(posting.getPersonal());
         personalTeam.setTeam(team);
+        personalRepository.save(posting.getPersonal());
 
         teamRepository.save(team);
 
@@ -44,6 +45,7 @@ public class TeamService {
         PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(sender);
         personalTeam.setTeam(team); // 팀 조인
 
+        personalRepository.save(sender);
         teamRepository.save(team);
 
         return team;

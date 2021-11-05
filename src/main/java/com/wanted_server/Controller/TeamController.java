@@ -2,14 +2,19 @@ package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Personal;
 import com.wanted_server.Class.PersonalTeam;
+import com.wanted_server.Class.Posting;
 import com.wanted_server.Class.Team;
 import com.wanted_server.Dto.PostingUpdateDto;
 import com.wanted_server.Repository.PersonalRepository;
+import com.wanted_server.Repository.PostingRepository;
 import com.wanted_server.Service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,12 +22,19 @@ public class TeamController {
 
     private final TeamService teamService;
     private final PersonalRepository personalRepository;
+    private final PostingRepository postingRepository;
 
-    // 팀 전체 조회, 팀을 조회할 일이 없음
+    // 회원프로필에서 팀 조회
     @GetMapping("/team/{personalId}")
-    public List<PersonalTeam> getTeams(@PathVariable Long personalId) {
+    public List<Long> getTeams(@PathVariable Long personalId) {
         Personal personal = personalRepository.findOne(personalId);
-        return personal.getPersonalTeams();
+        List<PersonalTeam> personalTeams = personal.getPersonalTeams();
+
+        Set<Long> teamsIds = new HashSet<>();
+        for (PersonalTeam personalTeam : personalTeams) {
+            teamsIds.add(personalTeam.getTeam().getId());
+        }
+        return (List<Long>) teamsIds;
     }
 
     // 팀 생성 (

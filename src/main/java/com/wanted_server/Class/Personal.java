@@ -1,8 +1,6 @@
 package com.wanted_server.Class;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.wanted_server.Dto.PersonalJoinDto;
 import com.wanted_server.Dto.PersonalUpdateDto;
@@ -32,7 +30,6 @@ public class Personal {
     private String pwd;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<PersonalTeam> personalTeams = new ArrayList<>();
 
     @Column(nullable = false)
@@ -63,7 +60,6 @@ public class Personal {
     private String address;
 
     @OneToMany(mappedBy = "personal")
-    @JsonManagedReference
     private List<Posting> postings = new ArrayList<>();
 
     public void addPersonalTeam(PersonalTeam personalTeam) {
