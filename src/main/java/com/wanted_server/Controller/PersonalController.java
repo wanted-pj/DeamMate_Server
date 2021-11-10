@@ -1,6 +1,7 @@
 package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Personal;
+import com.wanted_server.Dto.NotRoomTeamInfoPersonalDto;
 import com.wanted_server.Dto.PersonalJoinDto;
 import com.wanted_server.Dto.PersonalUpdateDto;
 import com.wanted_server.Repository.PersonalRepository;
@@ -8,6 +9,7 @@ import com.wanted_server.Service.PersonalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +22,27 @@ public class PersonalController {
     // 모든 회원 조회
     @GetMapping("/personal")
     public List<Personal> getPersonals() {
-        return personalRepository.findAll();
+        List<Personal> personals = personalRepository.findAll();
+//        List<NotRoomTeamInfoPersonalDto> findAll = new ArrayList<>();
+//        for (Personal personal : personals) {
+//            NotRoomTeamInfoPersonalDto notRoomTeamInfoPersonalDto = new NotRoomTeamInfoPersonalDto(
+//                    personal.getId(),
+//                    personal.getStringId(),
+//                    personal.getPwd(),
+//                    personal.getNickname(),
+//                    personal.getImg(),
+//                    personal.getSchool(),
+//                    personal.getMajor(),
+//                    personal.getGrade(),
+//                    personal.getAge(),
+//                    personal.getGender(),
+//                    personal.getCareer(),
+//                    personal.getAddress(),
+//                    personal.getPostings()
+//            );
+//            findAll.add(notRoomTeamInfoPersonalDto);
+//        }
+        return personals;
     }
 
     @GetMapping("/personal/{id}")
