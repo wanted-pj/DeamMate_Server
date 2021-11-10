@@ -29,7 +29,7 @@ public class Personal {
     @Column(nullable = false)
     private String pwd;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL)
     private List<PersonalTeam> personalTeams = new ArrayList<>();
 
     @Column(nullable = false)
@@ -62,6 +62,13 @@ public class Personal {
     @OneToMany(mappedBy = "personal")
     private List<Posting> postings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL)
+    private List<Participant> participants = new ArrayList<>();
+
+    public void addParticipant(Participant participant) {
+        participants.add(participant);
+        participant.setPersonal(this);
+    }
     public void addPersonalTeam(PersonalTeam personalTeam) {
         personalTeams.add(personalTeam);
         personalTeam.setPersonal(this);

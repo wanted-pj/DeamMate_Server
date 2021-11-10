@@ -29,7 +29,6 @@ public class TeamService {
         PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(posting.getPersonal());
         personalTeam.setTeam(team);
         personalRepository.save(posting.getPersonal());
-
         teamRepository.save(team);
 
         return team;
