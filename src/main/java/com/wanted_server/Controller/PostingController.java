@@ -1,6 +1,7 @@
 package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Posting;
+import com.wanted_server.Dto.FindAllPostingDto;
 import com.wanted_server.Dto.PostingCreateDto;
 import com.wanted_server.Dto.PostingInfoDto;
 import com.wanted_server.Dto.PostingUpdateDto;
@@ -36,7 +37,7 @@ public class PostingController {
 //    }
 
     @GetMapping("/posting")
-    public List<Posting> getPostings() {
+    public List<FindAllPostingDto> getPostings() {
         return postingService.findPostings();
     }
 

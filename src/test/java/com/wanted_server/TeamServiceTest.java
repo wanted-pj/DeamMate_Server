@@ -16,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +59,7 @@ public class TeamServiceTest {
         Long senderId = personalService.join(personal2);
 
         // 회원 한명이 posting 올림
-        PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.대외활동, "이겨내자 팀");
+        PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.스터디, "이겨내자 팀", LocalDateTime.now());
         Posting posting = new Posting(postingCreateDto);
         Long postingId = postingService.make(posting, leaderId);
         System.out.println("여기: " + posting);

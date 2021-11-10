@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @Transactional
 @SpringBootTest
@@ -47,10 +48,10 @@ public class AllServiceTest {
 //    @Rollback(value = false)
     public void 전체테스트() throws Exception {
         // 회원 2명 생성
-        PersonalJoinDto personalJoinDto1 = new PersonalJoinDto("tempId1", "1234",
-                "dfas", "adasdsa", "경기대", "경영", 4, 25, 1, "경기도", "개발자");
-        PersonalJoinDto personalJoinDto2 = new PersonalJoinDto("tempId2", "12345",
-                "nick", "add", "경기대", "컴공", 3, 24, 0, "경기도", "개발자");
+        PersonalJoinDto personalJoinDto1 = new PersonalJoinDto("a", "a",
+                "싀즨픵", "profile_basic1", "경기대", "경영", 4, 25, 1, "성남시", "개발자를 이끈다 후후후");
+        PersonalJoinDto personalJoinDto2 = new PersonalJoinDto("b", "b",
+                "오바마", "profile_basic2", "경기대", "컴공", 3, 24, 0, "진주시", "개발자를 꿈꾸다 후후후");
         Personal personal1 = new Personal(personalJoinDto1);
         Personal personal2 = new Personal(personalJoinDto2);
 
@@ -58,7 +59,7 @@ public class AllServiceTest {
         Long senderId = personalService.join(personal2);
 
         // 회원 한명이 posting 올림
-        PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.대외활동, "이겨내자 팀");
+        PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.스터디, "이겨내자 팀", LocalDateTime.now());
         Posting posting = new Posting(postingCreateDto);
         Long postingId = postingService.make(posting, leaderId);
         System.out.println("여기: " + posting);

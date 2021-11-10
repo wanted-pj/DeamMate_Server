@@ -1,12 +1,15 @@
 package com.wanted_server.Dto;
 
-import com.wanted_server.Class.PersonalTeam;
 import com.wanted_server.Class.Posting;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class NotRoomTeamInfoPersonalDto {
 
     private Long id;
@@ -21,9 +24,10 @@ public class NotRoomTeamInfoPersonalDto {
     private int gender;
     private String career;
     private String address;
-    private List<Posting> postings = new ArrayList<>();
+    private List<PersonalInPostingDto> postings;
 
-    public NotRoomTeamInfoPersonalDto(Long id, String stringId, String pwd, String nickname, String img, String school, String major, int grade, int age, int gender, String career, String address, List<Posting> postings) {
+    @Builder
+    public NotRoomTeamInfoPersonalDto(Long id, String stringId, String pwd, String nickname, String img, String school, String major, int grade, int age, int gender, String career, String address, List<PersonalInPostingDto> postings) {
         this.id = id;
         this.stringId = stringId;
         this.pwd = pwd;
@@ -39,3 +43,4 @@ public class NotRoomTeamInfoPersonalDto {
         this.postings = postings;
     }
 }
+

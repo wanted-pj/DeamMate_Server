@@ -1,7 +1,9 @@
 package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Personal;
+import com.wanted_server.Class.Posting;
 import com.wanted_server.Dto.NotRoomTeamInfoPersonalDto;
+import com.wanted_server.Dto.PersonalInPostingDto;
 import com.wanted_server.Dto.PersonalJoinDto;
 import com.wanted_server.Dto.PersonalUpdateDto;
 import com.wanted_server.Repository.PersonalRepository;
@@ -21,32 +23,13 @@ public class PersonalController {
 
     // 모든 회원 조회
     @GetMapping("/personal")
-    public List<Personal> getPersonals() {
-        List<Personal> personals = personalRepository.findAll();
-//        List<NotRoomTeamInfoPersonalDto> findAll = new ArrayList<>();
-//        for (Personal personal : personals) {
-//            NotRoomTeamInfoPersonalDto notRoomTeamInfoPersonalDto = new NotRoomTeamInfoPersonalDto(
-//                    personal.getId(),
-//                    personal.getStringId(),
-//                    personal.getPwd(),
-//                    personal.getNickname(),
-//                    personal.getImg(),
-//                    personal.getSchool(),
-//                    personal.getMajor(),
-//                    personal.getGrade(),
-//                    personal.getAge(),
-//                    personal.getGender(),
-//                    personal.getCareer(),
-//                    personal.getAddress(),
-//                    personal.getPostings()
-//            );
-//            findAll.add(notRoomTeamInfoPersonalDto);
-//        }
-        return personals;
+    public List<NotRoomTeamInfoPersonalDto> getPersonals() {
+        return personalService.findPersonals();
     }
 
     @GetMapping("/personal/{id}")
     public Personal getPersonals(@PathVariable Long id) {
+
         return personalService.findOne(id);
     }
 
