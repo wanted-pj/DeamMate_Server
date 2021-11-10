@@ -42,7 +42,7 @@ public class TeamServiceTest {
     @Autowired
     TeamService teamService;
 
-//    @Test
+    @Test
     public void 팀조회() throws Exception {
         // given
 
@@ -58,10 +58,10 @@ public class TeamServiceTest {
         Long senderId = personalService.join(personal2);
 
         // 회원 한명이 posting 올림
-        PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.대외활동);
+        PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.대외활동, "이겨내자 팀");
         Posting posting = new Posting(postingCreateDto);
         Long postingId = postingService.make(posting, leaderId);
-
+        System.out.println("여기: " + posting);
         // 회원 한명이 Connect를 보냄
         Connect connect = new Connect();
         connectService.make(connect, postingId, senderId);

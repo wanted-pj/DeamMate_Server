@@ -10,10 +10,12 @@ public class PostingUpdateDto {
     private String title;
     private String content;
     private Category category;
+    private String teamName;
 
-    public PostingUpdateDto(String title, String content, Category category) {
+    public PostingUpdateDto(String title, String content, Category category, String teamName) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.teamName = teamName;
     }
 }

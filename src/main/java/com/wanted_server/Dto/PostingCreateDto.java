@@ -9,10 +9,12 @@ public class PostingCreateDto {
     private String title;
     private String content;
     private Category category;
+    private String teamName;
 
-    public PostingCreateDto(String title, String content, Category category) {
+    public PostingCreateDto(String title, String content, Category category, String teamName) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.teamName = teamName;
     }
 }

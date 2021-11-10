@@ -5,6 +5,7 @@ import com.wanted_server.Class.Personal;
 import com.wanted_server.Class.Posting;
 import com.wanted_server.Dto.PostingUpdateDto;
 import com.wanted_server.Repository.ConnectRepository;
+import com.wanted_server.Repository.PersonalRepository;
 import com.wanted_server.Repository.PostingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,17 @@ public class ConnectService {
 
     private final ConnectRepository connectRepository;
     private final PostingRepository postingRepository;
+    private final PersonalRepository personalRepository;
 
     // 커넥트 만들기
     public Long make(Connect connect, Long postingId, Long senderId){
         Posting posting = postingRepository.findById(postingId).get();
+        Personal sender = personalRepository.findOne(senderId);
+
         connect.setPosting(posting);
         connect.setSenderId(senderId);
+        connect.setImg(sender.getImg());
+        connect.setNickname(sender.getNickname());
 
         connectRepository.save(connect);
         return connect.getId();

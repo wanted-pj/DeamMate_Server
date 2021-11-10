@@ -45,10 +45,13 @@ public class Posting {
     @JsonIgnore
     private Team team;
 
+    private String teamName;
+
     public Posting(PostingCreateDto postingCreateDto){
         this.title = postingCreateDto.getTitle();
         this.content = postingCreateDto.getContent();
         this.category = postingCreateDto.getCategory();
+        this.teamName = postingCreateDto.getTeamName();
 
         // 시간은 나중에 설정
         this.postingTime = LocalDateTime.now();
@@ -58,6 +61,7 @@ public class Posting {
         this.title = postingUpdateDto.getTitle();
         this.content = postingUpdateDto.getContent();
         this.category = postingUpdateDto.getCategory();
+        this.teamName = postingUpdateDto.getTeamName();
 
         // 업데이트 시간으로 시간 설정
         this.postingTime = LocalDateTime.now();
@@ -69,4 +73,16 @@ public class Posting {
         personal.getPostings().add(this);
     }
 
+    @Override
+    public String toString() {
+        return "Posting{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", postingTime=" + postingTime +
+                ", category=" + category +
+                ", connects=" + connects +
+                ", teamName='" + teamName + '\'' +
+                '}';
+    }
 }

@@ -29,11 +29,13 @@ public class Team {
     @JsonIgnore
     private Posting posting;
 
+    private String teamName;
+
     static public Team createTeam(Posting posting) {
         // 팀 생성
         Team team = new Team();
         team.setLeaderId(posting.getPersonal().getId()); // 리더Id 지정
-
+        team.setTeamName(posting.getTeamName());
         // 팀생성시 posting과 매핑
         team.setPosting(posting);
 

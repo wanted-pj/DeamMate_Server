@@ -1,5 +1,7 @@
 package com.wanted_server;
 
+import com.wanted_server.Repository.PersonalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration;
@@ -12,6 +14,8 @@ public class WantedServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WantedServerApplication.class, args);
+
+
     }
 
 }

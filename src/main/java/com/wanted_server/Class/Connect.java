@@ -27,6 +27,12 @@ public class Connect {
     @Column(nullable = false)
     private Long senderId;
 
+    @Column(nullable = false)
+    private String nickname;
+
+    @Column(nullable = false)
+    private String img;
+
     // 커넥트 생성시 포스팅과 연결
     public void setPosting(Posting posting) {
         this.posting = posting;

@@ -39,6 +39,7 @@ public class PostingService {
                 () -> new IllegalArgumentException("해당 포스팅 번호가 존재하지 않습니다.")
         );
         posting.update(postingUpdateDto);
+        postingRepository.save(posting);
         return posting.getId();
     }
 
