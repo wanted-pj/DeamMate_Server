@@ -100,29 +100,8 @@ public class TeamService {
     // 팀 탈퇴
 
     // 팀 삭제
-    public Long deleteTeam(Long teamId, Long personalId) {
-//        // 퍼스널을 찾고, 퍼스널의 personalTeam 제거 (연관관계 끊어줌)
-//        List<Personal> personals = personalRepository.findAll();
-//        for (Personal personal : personals) {
-//            personal.getPersonalTeams().
-//        }
-//        // 나와 일치하는 팀
-//        Personal personal = personalRepository.findOne(personalId);
-//
-//        // 전체 PersonalTeam
-//        List<PersonalTeam> allPersonalTeams = personalTeamRepository.findAll();
-//        for (PersonalTeam personalTeam : allPersonalTeams) {
-//            if (personalTeam.getTeam().getId() == teamId) { // 삭제
-//
-//            }
-//        }
-//            Long teamId = personalTeam.getTeam().getId();
-//
-//        Long teamId = personalTeam.getTeam().getId();
-//        personal.getPersonalTeams().remove(personalTeam); // 연관관계 끊어줌
-//        // 그리고 삭제
-//        teamRepository.deleteById(teamId);
-
+    public Long deleteTeam(Long teamId) {
+        teamRepository.deleteById(teamId);
         return teamId;
     }
 }

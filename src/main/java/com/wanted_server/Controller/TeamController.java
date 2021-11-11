@@ -47,8 +47,8 @@ public class TeamController {
 //    }
 
     // 팀 삭제
-    @DeleteMapping("/team/{teamId}/{personalId}")
-    public Long deleteTeam(@PathVariable Long teamId, @PathVariable Long personalId) {
-        return teamService.deleteTeam(teamId, personalId);
+    @DeleteMapping("/team/{teamId}")
+    public Long deleteTeam(@PathVariable Long teamId) {
+        return teamService.deleteTeam(teamId);
     }
 }
