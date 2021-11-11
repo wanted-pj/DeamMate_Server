@@ -35,6 +35,8 @@ public class Posting {
 
     private LocalDateTime postingTime;
 
+    private LocalDateTime endTime;
+
     @Enumerated(EnumType.STRING)
     private Category category;
 
@@ -47,11 +49,15 @@ public class Posting {
 
     private String teamName;
 
+    private boolean checkRecruiting;
+
     public Posting(PostingCreateDto postingCreateDto){
         this.title = postingCreateDto.getTitle();
         this.content = postingCreateDto.getContent();
         this.category = postingCreateDto.getCategory();
         this.teamName = postingCreateDto.getTeamName();
+        this.endTime = postingCreateDto.getEndTime();
+        this.checkRecruiting = true;
 
         // 시간은 나중에 설정
         this.postingTime = LocalDateTime.now();
@@ -62,6 +68,8 @@ public class Posting {
         this.content = postingUpdateDto.getContent();
         this.category = postingUpdateDto.getCategory();
         this.teamName = postingUpdateDto.getTeamName();
+        this.endTime = postingUpdateDto.getEndTime();
+        this.checkRecruiting = postingUpdateDto.isCheckRecruiting();
 
         // 업데이트 시간으로 시간 설정
         this.postingTime = LocalDateTime.now();

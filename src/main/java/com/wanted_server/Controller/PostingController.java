@@ -36,6 +36,7 @@ public class PostingController {
 //        return (List<PostingInfoDto>) postingInfoDtos;
 //    }
 
+
     @GetMapping("/posting")
     public List<FindAllPostingDto> getPostings() {
         return postingService.findPostings();

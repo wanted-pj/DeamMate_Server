@@ -3,6 +3,7 @@ package com.wanted_server.Dto;
 import com.wanted_server.Class.Posting;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class NotRoomTeamInfoPersonalDto {
 
     private Long id;

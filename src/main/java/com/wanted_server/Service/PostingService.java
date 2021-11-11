@@ -22,7 +22,7 @@ public class PostingService {
     private final PersonalRepository personalRepository;
 
     // 포스팅 만들기
-    public Long make(Posting posting, Long personalId){
+    public Long make(Posting posting, Long personalId) {
         Personal personal = personalRepository.findOne(personalId);
         posting.setPersonal(personal);
         Posting save = postingRepository.save(posting);
@@ -37,8 +37,8 @@ public class PostingService {
         for (Posting posting : postings) {
             FindAllPostingDto findAllPostingDto = new FindAllPostingDto(posting.getId(),
                     posting.getPersonal().getId(), posting.getTitle(), posting.getContent(),
-                    posting.getPostingTime(), posting.getCategory(), posting.getConnects(), posting.getTeamName(),
-                    posting.getTeam().getId(), posting.getPersonal().getNickname(), posting.getPersonal().getImg());
+                    posting.getPostingTime(), posting.getEndTime(), posting.getCategory(), posting.getConnects(), posting.getTeamName(),
+                    posting.getTeam().getId(), posting.getPersonal().getNickname(), posting.getPersonal().getImg(), posting.isCheckRecruiting());
             postingDtos.add(findAllPostingDto);
         }
         return postingDtos;
@@ -50,7 +50,7 @@ public class PostingService {
                 () -> new IllegalArgumentException("해당 포스팅 번호가 존재하지 않습니다.")
         );
         posting.update(postingUpdateDto);
-        postingRepository.save(posting);
+//        postingRepository.save(posting);
         return posting.getId();
     }
 

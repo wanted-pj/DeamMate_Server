@@ -33,24 +33,6 @@ public class PersonalController {
         return personalService.findOne(id);
     }
 
-//    // 학교로 여러개 조회
-//    @GetMapping("/personal/{school}")
-//    public List<Personal> getPersonalsBySchool(@PathVariable String school) {
-//        return personalRepository.findBySchool(school);
-//    }
-//
-//    // 전공으로 여러개 조회
-//    @GetMapping("/personal/{major}")
-//    public List<Personal> getPersonalsByMajor(@PathVariable String major) {
-//        return personalRepository.findByMajor(major);
-//    }
-//
-//    // 주소로 여러개 조회
-//    @GetMapping("/personal/{address}")
-//    public List<Personal> getPersonalsByAddress(@PathVariable String address) {
-//        return personalRepository.findByAddress(address);
-//    }
-
     // stringId로 아이디 중복 검사 조회
     @GetMapping("/personal/stringId/{stringId}")
     public void getPersonalsByStringId(@PathVariable String stringId) {
