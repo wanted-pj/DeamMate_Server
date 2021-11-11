@@ -3,14 +3,12 @@ package com.wanted_server.Controller;
 import com.wanted_server.Class.Posting;
 import com.wanted_server.Dto.FindAllPostingDto;
 import com.wanted_server.Dto.PostingCreateDto;
-import com.wanted_server.Dto.PostingInfoDto;
 import com.wanted_server.Dto.PostingUpdateDto;
 import com.wanted_server.Repository.PostingRepository;
 import com.wanted_server.Service.PostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +43,7 @@ public class PostingController {
 
     // 사람 Id를 전달받아서 posting 만들기
     @PostMapping("/posting/{personalId}")
-    public Posting createPosting(@RequestBody PostingCreateDto postingCreateDto, @PathVariable Long personalId) {
+    public Posting createPosting(@PathVariable Long personalId, @RequestBody PostingCreateDto postingCreateDto ) {
         Posting posting = new Posting(postingCreateDto);
         postingService.make(posting, personalId);
         return posting;

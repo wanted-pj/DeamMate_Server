@@ -45,6 +45,7 @@ public class TeamService {
             ProfileTeamPersonalsDto profileTeamPersonalsDto = new ProfileTeamPersonalsDto();
             profileTeamPersonalsDto.setTeamId(team.getId());
             profileTeamPersonalsDto.setTeamName(team.getTeamName());
+            profileTeamPersonalsDto.setLeaderId(team.getLeaderId());
 
             ArrayList<ProfilePersonalDto> personals = new ArrayList<>();
             for (PersonalTeam allPersonalTeam : allPersonalTeams) { // 전체안에서

@@ -12,5 +12,6 @@ import java.util.ArrayList;
 public class ProfileTeamPersonalsDto {
     Long teamId;
     String teamName;
+    Long leaderId;
     ArrayList<ProfilePersonalDto> personals;
 }
