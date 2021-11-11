@@ -70,11 +70,15 @@ public class AllServiceTest {
 
         // 팀 수락
         // - 팀 생성
-        teamService.makeTeam(postingId);
+        Team team1 = teamService.makeTeam(postingId);
+        for (PersonalTeam personalTeam : personal1.getPersonalTeams()) {
+            System.out.println(personalTeam);
+        }
         // - 팀 조인
-        teamService.joinTeam(connect.getId());
-
-
+        Team team = teamService.joinTeam(connect.getId());
+        for (PersonalTeam personalTeam : personal2.getPersonalTeams()) {
+            System.out.println(personalTeam);
+        }
         // 회원 한명이 채팅 시작을 위해 "쪽지하기"를 누름. => 방생성
         Room room = roomService.makeRoom(leaderId, senderId);
         System.out.println("room.getId() = " + room.getId());

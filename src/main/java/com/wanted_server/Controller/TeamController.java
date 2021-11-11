@@ -1,20 +1,15 @@
 package com.wanted_server.Controller;
 
-import com.wanted_server.Class.Personal;
-import com.wanted_server.Class.PersonalTeam;
-import com.wanted_server.Class.Posting;
 import com.wanted_server.Class.Team;
-import com.wanted_server.Dto.PostingUpdateDto;
+import com.wanted_server.Dto.ProfileTeamPersonalsDto;
 import com.wanted_server.Repository.PersonalRepository;
+import com.wanted_server.Repository.PersonalTeamRepository;
 import com.wanted_server.Repository.PostingRepository;
 import com.wanted_server.Service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,18 +18,12 @@ public class TeamController {
     private final TeamService teamService;
     private final PersonalRepository personalRepository;
     private final PostingRepository postingRepository;
+    private final PersonalTeamRepository personalTeamRepository;
 
     // 회원프로필에서 팀 조회
     @GetMapping("/team/{personalId}")
-    public List<Long> getTeams(@PathVariable Long personalId) {
-        Personal personal = personalRepository.findOne(personalId);
-        List<PersonalTeam> personalTeams = personal.getPersonalTeams();
-
-        Set<Long> teamsIds = new HashSet<>();
-        for (PersonalTeam personalTeam : personalTeams) {
-            teamsIds.add(personalTeam.getTeam().getId());
-        }
-        return (List<Long>) teamsIds;
+    public List<ProfileTeamPersonalsDto> getTeams(@PathVariable Long personalId) {
+        return teamService.getTeams(personalId);
     }
 
     // 팀 생성 (
@@ -58,5 +47,9 @@ public class TeamController {
 //    }
 
     // 팀 삭제
-
+    @DeleteMapping("/posting/{teamId}")
+    public Long deleteTeam(@PathVariable Long teamId) {
+        teamService.deleteTeam(teamId);
+        return teamId;
+    }
 }

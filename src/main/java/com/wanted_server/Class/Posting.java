@@ -49,7 +49,7 @@ public class Posting {
 
     private String teamName;
 
-    private boolean checkRecruiting;
+    private Boolean checkRecruiting;
 
     public Posting(PostingCreateDto postingCreateDto){
         this.title = postingCreateDto.getTitle();

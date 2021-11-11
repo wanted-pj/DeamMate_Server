@@ -1,13 +1,16 @@
 package com.wanted_server.Service;
 
 import com.wanted_server.Class.*;
-import com.wanted_server.Repository.ConnectRepository;
-import com.wanted_server.Repository.PersonalRepository;
-import com.wanted_server.Repository.PostingRepository;
-import com.wanted_server.Repository.TeamRepository;
+import com.wanted_server.Dto.ProfilePersonalDto;
+import com.wanted_server.Dto.ProfileTeamPersonalsDto;
+import com.wanted_server.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,9 +18,46 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeamService {
 
     private final PersonalRepository personalRepository;
+    private final PersonalTeamRepository personalTeamRepository;
     private final TeamRepository teamRepository;
     private final PostingRepository postingRepository;
     private final ConnectRepository connectRepository;
+
+    // 프로필에서 팀 조회
+    public List<ProfileTeamPersonalsDto> getTeams(@PathVariable Long personalId) {
+        // 나와 일치하는 팀
+        Personal personal = personalRepository.findOne(personalId);
+        List<PersonalTeam> personalTeams = personal.getPersonalTeams();
+
+        // 전달해줄 List
+        List<ProfileTeamPersonalsDto> teamDto = new ArrayList<>();
+
+        // 전체 PersonalTeam
+        List<PersonalTeam> allPersonalTeams = personalTeamRepository.findAll();
+        for (PersonalTeam personalTeam : personalTeams) { // 내거 안에서 찾는다.
+            Long teamId = personalTeam.getTeam().getId();
+
+            ProfileTeamPersonalsDto profileTeamPersonalsDto = new ProfileTeamPersonalsDto();
+            profileTeamPersonalsDto.setTeamId(teamId);
+            profileTeamPersonalsDto.setTeamName(personalTeam.getTeam().getTeamName());
+
+            ArrayList<ProfilePersonalDto> personals = new ArrayList<>();
+            for (PersonalTeam allPersonalTeam : allPersonalTeams) { // 전체안에서
+                if (allPersonalTeam.getTeam().getId() == teamId && allPersonalTeam.getPersonal().getId() != personalId) {
+                    Personal tempPersonal = allPersonalTeam.getPersonal();
+                    ProfilePersonalDto profilePersonalDto = new ProfilePersonalDto(
+                            tempPersonal.getId(), tempPersonal.getNickname(), tempPersonal.getImg(),
+                            tempPersonal.getSchool(), tempPersonal.getMajor(), tempPersonal.getAddress()
+                    );
+                    personals.add(profilePersonalDto);
+                }
+            }
+            profileTeamPersonalsDto.setPersonals(personals);
+            teamDto.add(profileTeamPersonalsDto);
+        }
+
+        return teamDto;
+    }
 
     // 팀생성
     public Team makeTeam(Long postingId) {
@@ -53,5 +93,8 @@ public class TeamService {
     // 팀 탈퇴
 
     // 팀 삭제
-
+    public Long deleteTeam(Long teamId) {
+        teamRepository.deleteById(teamId);
+        return teamId;
+    }
 }

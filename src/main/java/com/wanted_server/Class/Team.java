@@ -46,4 +46,14 @@ public class Team {
         this.posting = posting;
         posting.setTeam(this);
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", leaderId=" + leaderId +
+                ", posting=" + posting +
+                ", teamName='" + teamName + '\'' +
+                '}';
+    }
 }

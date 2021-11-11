@@ -38,7 +38,7 @@ public class PostingService {
             FindAllPostingDto findAllPostingDto = new FindAllPostingDto(posting.getId(),
                     posting.getPersonal().getId(), posting.getTitle(), posting.getContent(),
                     posting.getPostingTime(), posting.getEndTime(), posting.getCategory(), posting.getConnects(), posting.getTeamName(),
-                    posting.getTeam().getId(), posting.getPersonal().getNickname(), posting.getPersonal().getImg(), posting.isCheckRecruiting());
+                    posting.getTeam().getId(), posting.getPersonal().getNickname(), posting.getPersonal().getImg(), posting.getCheckRecruiting());
             postingDtos.add(findAllPostingDto);
         }
         return postingDtos;
@@ -52,6 +52,15 @@ public class PostingService {
         posting.update(postingUpdateDto);
 //        postingRepository.save(posting);
         return posting.getId();
+    }
+
+    // 포스트 수정
+    public Posting updateRecruiting(Long postingId, boolean checkRecruiting) {
+        Posting posting = postingRepository.findById(postingId).orElseThrow(
+                () -> new IllegalArgumentException("해당 포스팅 번호가 존재하지 않습니다.")
+        );
+        posting.setCheckRecruiting(checkRecruiting);
+        return posting;
     }
 
     // 포스트 삭제

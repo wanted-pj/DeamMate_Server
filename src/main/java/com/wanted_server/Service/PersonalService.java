@@ -49,7 +49,7 @@ public class PersonalService {
                 PersonalInPostingDto personalInPostingDto = new PersonalInPostingDto(
                         posting.getId(), posting.getTitle(), posting.getContent(),
                         posting.getPostingTime(), posting.getEndTime(), posting.getCategory(),
-                        posting.getConnects(), posting.getTeamName(), posting.isCheckRecruiting());
+                        posting.getConnects(), posting.getTeamName(), posting.getCheckRecruiting());
                 postings.add(personalInPostingDto);
             }
             NotRoomTeamInfoPersonalDto notRoomTeamInfoPersonalDto = new NotRoomTeamInfoPersonalDto(

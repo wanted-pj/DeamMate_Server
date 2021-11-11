@@ -41,4 +41,12 @@ public class PersonalTeam {
     }
 
 
+    @Override
+    public String toString() {
+        return "PersonalTeam{" +
+                "id=" + id +
+                ", personal=" + personal.getId() +
+                ", team=" + team.getId() +
+                '}';
+    }
 }
