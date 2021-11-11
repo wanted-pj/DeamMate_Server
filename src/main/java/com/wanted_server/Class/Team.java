@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -31,6 +33,9 @@ public class Team {
 
     private String teamName;
 
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    private List<PersonalTeam> personalTeams = new ArrayList<>();
+
     static public Team createTeam(Posting posting) {
         // 팀 생성
         Team team = new Team();
@@ -40,6 +45,11 @@ public class Team {
         team.setPosting(posting);
 
         return team;
+    }
+
+    public void addPersonalTeam(PersonalTeam personalTeam) {
+        personalTeams.add(personalTeam);
+        personalTeam.setTeam(this);
     }
 
     public void setPosting(Posting posting) {
@@ -54,6 +64,7 @@ public class Team {
                 ", leaderId=" + leaderId +
                 ", posting=" + posting +
                 ", teamName='" + teamName + '\'' +
+                ", personalTeams=" + personalTeams +
                 '}';
     }
 }

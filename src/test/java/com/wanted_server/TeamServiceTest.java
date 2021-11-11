@@ -76,11 +76,11 @@ public class TeamServiceTest {
         // when
         Personal personal = personalRepository.findOne(leaderId);
         System.out.println("peronal조회: " + personal.getId());
-        List<PersonalTeam> personalTeams = personal.getPersonalTeams();
-
-        for (PersonalTeam personalTeam : personalTeams) {
-            System.out.println("조회:" + personalTeam.getId());
-        }
+//        List<PersonalTeam> personalTeams = personal.getPersonalTeams();
+//
+//        for (PersonalTeam personalTeam : personalTeams) {
+//            System.out.println("조회:" + personalTeam.getId());
+//        }
 
         // result
         return;

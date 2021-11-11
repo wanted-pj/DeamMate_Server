@@ -44,8 +44,8 @@ public class AllServiceTest {
     @Autowired
     MessageService messageService;
 
-//    @Test
-//    @Rollback(value = false)
+    @Test
+    @Rollback(value = false)
     public void 전체테스트() throws Exception {
         // 회원 2명 생성
         PersonalJoinDto personalJoinDto1 = new PersonalJoinDto("a", "a",
@@ -71,14 +71,10 @@ public class AllServiceTest {
         // 팀 수락
         // - 팀 생성
         Team team1 = teamService.makeTeam(postingId);
-        for (PersonalTeam personalTeam : personal1.getPersonalTeams()) {
-            System.out.println(personalTeam);
-        }
+        System.out.println("여기: " + team1);
         // - 팀 조인
         Team team = teamService.joinTeam(connect.getId());
-        for (PersonalTeam personalTeam : personal2.getPersonalTeams()) {
-            System.out.println(personalTeam);
-        }
+        System.out.println("여기: " + team);
         // 회원 한명이 채팅 시작을 위해 "쪽지하기"를 누름. => 방생성
         Room room = roomService.makeRoom(leaderId, senderId);
         System.out.println("room.getId() = " + room.getId());

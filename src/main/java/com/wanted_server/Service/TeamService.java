@@ -27,23 +27,28 @@ public class TeamService {
     public List<ProfileTeamPersonalsDto> getTeams(@PathVariable Long personalId) {
         // 나와 일치하는 팀
         Personal personal = personalRepository.findOne(personalId);
-        List<PersonalTeam> personalTeams = personal.getPersonalTeams();
+
+        // 전체 PersonalTeam
+        ArrayList<Team> teamList = new ArrayList<>();
+        List<PersonalTeam> allPersonalTeams = personalTeamRepository.findAll();
+        for (PersonalTeam allPersonalTeam : allPersonalTeams) {
+            if (allPersonalTeam.getPersonal().getId() == personalId) {
+                teamList.add(allPersonalTeam.getTeam());
+            }
+        }
+
 
         // 전달해줄 List
         List<ProfileTeamPersonalsDto> teamDto = new ArrayList<>();
 
-        // 전체 PersonalTeam
-        List<PersonalTeam> allPersonalTeams = personalTeamRepository.findAll();
-        for (PersonalTeam personalTeam : personalTeams) { // 내거 안에서 찾는다.
-            Long teamId = personalTeam.getTeam().getId();
-
+        for (Team team : teamList) { // 내의 팀 종류 별로 찾는다.
             ProfileTeamPersonalsDto profileTeamPersonalsDto = new ProfileTeamPersonalsDto();
-            profileTeamPersonalsDto.setTeamId(teamId);
-            profileTeamPersonalsDto.setTeamName(personalTeam.getTeam().getTeamName());
+            profileTeamPersonalsDto.setTeamId(team.getId());
+            profileTeamPersonalsDto.setTeamName(team.getTeamName());
 
             ArrayList<ProfilePersonalDto> personals = new ArrayList<>();
             for (PersonalTeam allPersonalTeam : allPersonalTeams) { // 전체안에서
-                if (allPersonalTeam.getTeam().getId() == teamId && allPersonalTeam.getPersonal().getId() != personalId) {
+                if (allPersonalTeam.getTeam().getId() == team.getId() && allPersonalTeam.getPersonal().getId() != personalId) {
                     Personal tempPersonal = allPersonalTeam.getPersonal();
                     ProfilePersonalDto profilePersonalDto = new ProfilePersonalDto(
                             tempPersonal.getId(), tempPersonal.getNickname(), tempPersonal.getImg(),
@@ -66,10 +71,12 @@ public class TeamService {
         Team team = Team.createTeam(posting);
 
         // Personal에서, PersonalTeam에서 처리
-        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(posting.getPersonal());
-        personalTeam.setTeam(team);
+        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(posting.getTeam());
+        personalTeam.setPersonal(posting.getPersonal());
+
         personalRepository.save(posting.getPersonal());
         teamRepository.save(team);
+//        personalTeamRepository.save(personalTeam);
 
         return team;
     }
@@ -81,8 +88,8 @@ public class TeamService {
         Team team = connect.getPosting().getTeam();
 
         // Personal에서, PersonalTeam에서 처리
-        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(sender);
-        personalTeam.setTeam(team); // 팀 조인
+        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(team);
+        personalTeam.setPersonal(sender); // 사람 조인
 
         personalRepository.save(sender);
         teamRepository.save(team);
@@ -93,8 +100,29 @@ public class TeamService {
     // 팀 탈퇴
 
     // 팀 삭제
-    public Long deleteTeam(Long teamId) {
-        teamRepository.deleteById(teamId);
+    public Long deleteTeam(Long teamId, Long personalId) {
+//        // 퍼스널을 찾고, 퍼스널의 personalTeam 제거 (연관관계 끊어줌)
+//        List<Personal> personals = personalRepository.findAll();
+//        for (Personal personal : personals) {
+//            personal.getPersonalTeams().
+//        }
+//        // 나와 일치하는 팀
+//        Personal personal = personalRepository.findOne(personalId);
+//
+//        // 전체 PersonalTeam
+//        List<PersonalTeam> allPersonalTeams = personalTeamRepository.findAll();
+//        for (PersonalTeam personalTeam : allPersonalTeams) {
+//            if (personalTeam.getTeam().getId() == teamId) { // 삭제
+//
+//            }
+//        }
+//            Long teamId = personalTeam.getTeam().getId();
+//
+//        Long teamId = personalTeam.getTeam().getId();
+//        personal.getPersonalTeams().remove(personalTeam); // 연관관계 끊어줌
+//        // 그리고 삭제
+//        teamRepository.deleteById(teamId);
+
         return teamId;
     }
 }

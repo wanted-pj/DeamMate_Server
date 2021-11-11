@@ -29,9 +29,6 @@ public class Personal {
     @Column(nullable = false)
     private String pwd;
 
-    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL)
-    private List<PersonalTeam> personalTeams = new ArrayList<>();
-
     @Column(nullable = false)
     private String nickname;
 
@@ -68,10 +65,6 @@ public class Personal {
     public void addParticipant(Participant participant) {
         participants.add(participant);
         participant.setPersonal(this);
-    }
-    public void addPersonalTeam(PersonalTeam personalTeam) {
-        personalTeams.add(personalTeam);
-        personalTeam.setPersonal(this);
     }
 
     public Personal(PersonalJoinDto personalJoinDto) {

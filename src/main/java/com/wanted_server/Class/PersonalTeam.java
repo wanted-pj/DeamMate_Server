@@ -25,21 +25,19 @@ public class PersonalTeam {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_id")
-    @JsonBackReference
     private Personal personal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
+    @JsonBackReference
     private Team team;
 
     //== 생성 메서드 ==//
-    static public PersonalTeam createPersonalTeam(Personal personal) {
+    static public PersonalTeam createPersonalTeam(Team team) {
         PersonalTeam personalTeam = new PersonalTeam();
-        personal.addPersonalTeam(personalTeam);
-        System.out.println("CreatePersonal Team여기: " + personal.getId());
+        team.addPersonalTeam(personalTeam);
         return personalTeam;
     }
-
 
     @Override
     public String toString() {
