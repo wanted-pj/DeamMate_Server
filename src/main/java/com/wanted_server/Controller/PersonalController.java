@@ -2,10 +2,7 @@ package com.wanted_server.Controller;
 
 import com.wanted_server.Class.Personal;
 import com.wanted_server.Class.Posting;
-import com.wanted_server.Dto.NotRoomTeamInfoPersonalDto;
-import com.wanted_server.Dto.PersonalInPostingDto;
-import com.wanted_server.Dto.PersonalJoinDto;
-import com.wanted_server.Dto.PersonalUpdateDto;
+import com.wanted_server.Dto.*;
 import com.wanted_server.Repository.PersonalRepository;
 import com.wanted_server.Service.PersonalService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +24,16 @@ public class PersonalController {
         return personalService.findPersonals();
     }
 
+    // id로 회원의 모든 정보 조회
     @GetMapping("/personal/{id}")
     public Personal getPersonals(@PathVariable Long id) {
-
         return personalService.findOne(id);
+    }
+
+    // 채팅ListFragment 들어왔을 때
+    @GetMapping("/personal/chat/{id}")
+    public PersonalChatDto getChatPersonal(@PathVariable Long id) {
+        return personalService.getChatPersonal(id);
     }
 
     // stringId로 아이디 중복 검사 조회

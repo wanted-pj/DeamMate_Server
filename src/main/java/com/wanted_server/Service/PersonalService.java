@@ -1,12 +1,13 @@
 package com.wanted_server.Service;
 
+import com.wanted_server.Class.Participant;
 import com.wanted_server.Class.Personal;
 import com.wanted_server.Class.Posting;
-import com.wanted_server.Dto.NotRoomTeamInfoPersonalDto;
-import com.wanted_server.Dto.PersonalInPostingDto;
-import com.wanted_server.Dto.PersonalJoinDto;
-import com.wanted_server.Dto.PersonalUpdateDto;
+import com.wanted_server.Class.Room;
+import com.wanted_server.Dto.*;
+import com.wanted_server.Repository.ParticipantRepository;
 import com.wanted_server.Repository.PersonalRepository;
+import com.wanted_server.Repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ import java.util.List;
 public class PersonalService {
 
     private final PersonalRepository personalRepository;
+
+    private final ParticipantRepository participantRepository;
 
     /*
     회원가입
@@ -76,6 +79,37 @@ public class PersonalService {
     // 단건 조회
     public Personal findOne(Long id) {
         return personalRepository.findOne(id);
+    }
+
+    // 채팅 내역 조회
+    public PersonalChatDto getChatPersonal(Long id) {
+        Personal personal = personalRepository.findOne(id);
+        List<Participant> myParticipants = personal.getParticipants();
+        List<Participant> allParticipants = participantRepository.findAll();
+
+        List<ParticipantInPersonalDto> ParticipantInPersonalDtos = new ArrayList<>();
+
+        for (Participant myParticipant : myParticipants) {
+            Long myRoomId = myParticipant.getRoom().getId();// 나의 룸
+            ParticipantInPersonalDto participantInPersonalDto = new ParticipantInPersonalDto();
+            participantInPersonalDto.setRoom(myParticipant.getRoom());
+
+            // 상대방 찾기
+            for (Participant temp : allParticipants) {
+                // 찾았다.
+                if (myRoomId == temp.getRoom().getId() && id != temp.getPersonal().getId()) {
+                    Personal theOther = personalRepository.findOne(temp.getPersonal().getId());
+                    participantInPersonalDto.setImg(theOther.getImg());
+                    participantInPersonalDto.setNickname(theOther.getNickname());
+                }
+            }
+            ParticipantInPersonalDtos.add(participantInPersonalDto);
+        }
+
+        return PersonalChatDto.builder()
+                .participants(ParticipantInPersonalDtos)
+                .id(personal.getId())
+                .build();
     }
 
     // 회원정보 변경

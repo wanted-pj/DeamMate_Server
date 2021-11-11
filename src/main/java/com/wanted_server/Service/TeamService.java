@@ -72,12 +72,11 @@ public class TeamService {
         Team team = Team.createTeam(posting);
 
         // Personal에서, PersonalTeam에서 처리
-        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(posting.getTeam());
+        PersonalTeam personalTeam = PersonalTeam.createPersonalTeam(team);
         personalTeam.setPersonal(posting.getPersonal());
 
-        personalRepository.save(posting.getPersonal());
         teamRepository.save(team);
-//        personalTeamRepository.save(personalTeam);
+        personalTeamRepository.save(personalTeam);
 
         return team;
     }
