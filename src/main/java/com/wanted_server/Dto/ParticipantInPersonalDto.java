@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -15,5 +16,6 @@ public class ParticipantInPersonalDto{
     private Room room;
     private String nickname;
     private String img;
-
+    private Long theOtherPersonalId;
+    private LocalDateTime lastMessageTime;
 }

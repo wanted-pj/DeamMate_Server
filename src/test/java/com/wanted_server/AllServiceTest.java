@@ -52,11 +52,19 @@ public class AllServiceTest {
                 "싀즨픵", "profile_basic1", "경기대", "경영", 4, 25, 1, "성남시", "개발자를 이끈다 후후후");
         PersonalJoinDto personalJoinDto2 = new PersonalJoinDto("b", "b",
                 "오바마", "profile_basic2", "경기대", "컴공", 3, 24, 0, "진주시", "개발자를 꿈꾸다 후후후");
+        PersonalJoinDto personalJoinDto3 = new PersonalJoinDto("m", "m",
+                "아베쉑", "profile_basic3", "경기대", "경영", 4, 25, 1, "서울시", "개발자를 이끈다 후후후");
+        PersonalJoinDto personalJoinDto4 = new PersonalJoinDto("n", "n",
+                "괴물쥐", "profile_basic4", "경기대", "컴공", 3, 24, 0, "진주시", "개발자를 꿈꾸다 후후후");
         Personal personal1 = new Personal(personalJoinDto1);
         Personal personal2 = new Personal(personalJoinDto2);
+        Personal personal3 = new Personal(personalJoinDto3);
+        Personal personal4 = new Personal(personalJoinDto4);
 
         Long leaderId = personalService.join(personal1);
         Long senderId = personalService.join(personal2);
+        personalService.join(personal3);
+        personalService.join(personal4);
 
         // 회원 한명이 posting 올림
         PostingCreateDto postingCreateDto = new PostingCreateDto("개발자 구해요", "사람구해요", Category.스터디, "이겨내자 팀", LocalDateTime.now());
@@ -69,6 +77,7 @@ public class AllServiceTest {
         connectService.make(connect, postingId, senderId);
 
         // 팀 수락
+        connectService.updateResult(connect.getId());
         // - 팀 생성
         Team team1 = teamService.makeTeam(postingId);
         System.out.println("여기: " + team1);

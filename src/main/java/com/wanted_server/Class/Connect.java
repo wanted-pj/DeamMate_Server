@@ -35,6 +35,8 @@ public class Connect {
     @Column(nullable = false)
     private String img;
 
+    private boolean result;
+
     // 커넥트 생성시 포스팅과 연결
     public void setPosting(Posting posting) {
         this.posting = posting;

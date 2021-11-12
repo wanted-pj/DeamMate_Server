@@ -37,7 +37,6 @@ public class RoomService {
         personalRepository.save(sender);
         personalRepository.save(receiver);
 
-
         return save;
     }
 }

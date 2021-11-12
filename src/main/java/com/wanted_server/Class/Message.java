@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -35,6 +36,8 @@ public class Message {
 
     private boolean readCheck;
 
+    private LocalDateTime messagingTime;
+
     public void setRoom(Room room) {
         this.room = room;
         room.getMessages().add(this);
@@ -43,8 +46,10 @@ public class Message {
     public Message(MessageCreateDto messageCreateDto){
         this.content = messageCreateDto.getContent();
         this.senderId = messageCreateDto.getSenderId();
+        this.messagingTime = LocalDateTime.now();
         // 읽었는지는 나중에 설정(처음은 무조건 아직 안읽음)
         this.readCheck = false;
+
     }
 
     @Override

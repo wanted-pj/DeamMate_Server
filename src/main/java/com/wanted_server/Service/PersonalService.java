@@ -20,6 +20,7 @@ public class PersonalService {
     private final PersonalRepository personalRepository;
     private final ParticipantRepository participantRepository;
     private final EvaluationService evaluationService;
+
     /*
     회원가입
      */
@@ -98,8 +99,14 @@ public class PersonalService {
                 // 찾았다.
                 if (myRoomId == temp.getRoom().getId() && id != temp.getPersonal().getId()) {
                     Personal theOther = personalRepository.findOne(temp.getPersonal().getId());
+                    participantInPersonalDto.setTheOtherPersonalId(theOther.getId());
                     participantInPersonalDto.setImg(theOther.getImg());
                     participantInPersonalDto.setNickname(theOther.getNickname());
+
+                    List<Message> messages = temp.getRoom().getMessages();
+                    if(messages != null && !messages.isEmpty()){
+                        participantInPersonalDto.setLastMessageTime(messages.get(messages.size() - 1).getMessagingTime());
+                    }
                 }
             }
             ParticipantInPersonalDtos.add(participantInPersonalDto);

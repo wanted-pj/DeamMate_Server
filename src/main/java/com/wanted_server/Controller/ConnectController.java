@@ -3,10 +3,9 @@ package com.wanted_server.Controller;
 import com.wanted_server.Class.Connect;
 import com.wanted_server.Service.ConnectService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,7 +26,11 @@ public class ConnectController {
         return connect;
     }
 
-    // 커넥트 수정 필요없음
+    // 커넥트 처리되면 업데이트
+    @PutMapping("/connect/{connectId}")
+    public void updateConnect(@PathVariable Long connectId) {
+        connectService.updateResult(connectId);
+    }
 
     // 커넥트 삭제
     @DeleteMapping("/connect/{connectId}")

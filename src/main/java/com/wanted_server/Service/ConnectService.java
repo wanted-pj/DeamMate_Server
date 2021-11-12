@@ -31,6 +31,7 @@ public class ConnectService {
         connect.setSenderId(senderId);
         connect.setImg(sender.getImg());
         connect.setNickname(sender.getNickname());
+        connect.setResult(false);
 
         connectRepository.save(connect);
         return connect.getId();
@@ -46,5 +47,10 @@ public class ConnectService {
     public Long delete(Long postingId) {
         connectRepository.deleteById(postingId);
         return postingId;
+    }
+
+    public void updateResult(Long connectId) {
+        Connect connect = connectRepository.findById(connectId).get();
+        connect.setResult(true);
     }
 }
