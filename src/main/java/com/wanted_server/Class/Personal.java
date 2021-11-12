@@ -61,11 +61,11 @@ public class Personal {
     private List<Posting> postings = new ArrayList<>();
 
     @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Participant> participants = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "evaluation_id")
-    @JsonIgnore
     private Evaluation evaluation;
 
     public void addParticipant(Participant participant) {

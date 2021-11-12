@@ -27,6 +27,7 @@ public class Posting {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "leader_id")
+    @JsonIgnore
     private Personal personal;
 
     private String title;
