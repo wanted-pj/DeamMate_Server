@@ -1,6 +1,7 @@
 package com.wanted_server.Class;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.wanted_server.Dto.PersonalJoinDto;
 import com.wanted_server.Dto.PersonalUpdateDto;
@@ -62,6 +63,11 @@ public class Personal {
     @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL)
     private List<Participant> participants = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "evaluation_id")
+    @JsonIgnore
+    private Evaluation evaluation;
+
     public void addParticipant(Participant participant) {
         participants.add(participant);
         participant.setPersonal(this);
@@ -79,6 +85,7 @@ public class Personal {
         this.gender = personalJoinDto.gender;
         this.career = personalJoinDto.career;
         this.address = personalJoinDto.address;
+
     }
 
     public void update(PersonalUpdateDto personalUpdateDto) {
@@ -95,4 +102,8 @@ public class Personal {
         this.address = personalUpdateDto.address;
     }
 
+    public void setEvaluation(Evaluation evaluation) {
+        evaluation.setPersonal(this);
+        this.evaluation = evaluation;
+    }
 }

@@ -1,9 +1,12 @@
 package com.wanted_server.Controller;
 
+import com.wanted_server.Class.Evaluation;
 import com.wanted_server.Class.Personal;
 import com.wanted_server.Class.Posting;
 import com.wanted_server.Dto.*;
+import com.wanted_server.Repository.EvaluationRepository;
 import com.wanted_server.Repository.PersonalRepository;
+import com.wanted_server.Service.EvaluationService;
 import com.wanted_server.Service.PersonalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,8 @@ import java.util.Map;
 public class PersonalController {
     private final PersonalRepository personalRepository;
     private final PersonalService personalService;
+    private final EvaluationService evaluationService;
+    private final EvaluationRepository evaluationRepository;
 
     // 모든 회원 조회
     @GetMapping("/personal")
@@ -45,8 +50,10 @@ public class PersonalController {
     // 회원 생성
     @PostMapping("/personal")
     public Personal createPersonal(@RequestBody PersonalJoinDto personalJoinDto) {
+        // 둘다 DB에 저장
         Personal personal = new Personal(personalJoinDto);
         personalService.join(personal);
+
         return personal;
     }
 

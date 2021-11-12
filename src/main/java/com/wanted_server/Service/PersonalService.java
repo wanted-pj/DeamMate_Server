@@ -1,9 +1,6 @@
 package com.wanted_server.Service;
 
-import com.wanted_server.Class.Participant;
-import com.wanted_server.Class.Personal;
-import com.wanted_server.Class.Posting;
-import com.wanted_server.Class.Room;
+import com.wanted_server.Class.*;
 import com.wanted_server.Dto.*;
 import com.wanted_server.Repository.ParticipantRepository;
 import com.wanted_server.Repository.PersonalRepository;
@@ -21,16 +18,18 @@ import java.util.List;
 public class PersonalService {
 
     private final PersonalRepository personalRepository;
-
     private final ParticipantRepository participantRepository;
-
+    private final EvaluationService evaluationService;
     /*
     회원가입
      */
     @Transactional
     public Long join(Personal personal) {
         validateDuplicateException(personal.getStringId());
+        Evaluation evaluation = evaluationService.initEvaluation();
+        personal.setEvaluation(evaluation);
         personalRepository.save(personal);
+
         return personal.getId();
     }
 
