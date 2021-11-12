@@ -45,21 +45,20 @@ public class PostingService {
     }
 
     // 포스트 수정
-    public Long update(Long postingId, PostingUpdateDto postingUpdateDto) {
+    public Posting update(Long postingId, PostingUpdateDto postingUpdateDto) {
         Posting posting = postingRepository.findById(postingId).orElseThrow(
                 () -> new IllegalArgumentException("해당 포스팅 번호가 존재하지 않습니다.")
         );
         posting.update(postingUpdateDto);
-//        postingRepository.save(posting);
-        return posting.getId();
+        return posting;
     }
 
     // 포스트 수정
-    public Posting updateRecruiting(Long postingId, boolean checkRecruiting) {
+    public Posting updateRecruiting(Long postingId) {
         Posting posting = postingRepository.findById(postingId).orElseThrow(
                 () -> new IllegalArgumentException("해당 포스팅 번호가 존재하지 않습니다.")
         );
-        posting.setCheckRecruiting(checkRecruiting);
+        posting.setCheckRecruiting(!posting.getCheckRecruiting());
         return posting;
     }
 

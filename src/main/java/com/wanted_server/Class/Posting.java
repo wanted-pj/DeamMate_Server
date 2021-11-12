@@ -70,7 +70,6 @@ public class Posting {
         this.category = postingUpdateDto.getCategory();
         this.teamName = postingUpdateDto.getTeamName();
         this.endTime = postingUpdateDto.getEndTime();
-        this.checkRecruiting = postingUpdateDto.isCheckRecruiting();
 
         // 업데이트 시간으로 시간 설정
         this.postingTime = LocalDateTime.now();

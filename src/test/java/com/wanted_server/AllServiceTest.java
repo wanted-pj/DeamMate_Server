@@ -91,8 +91,12 @@ public class AllServiceTest {
         // when
         // 한명이 쪽지를 보냄
         MessageCreateDto messageCreateDto1 = new MessageCreateDto(room.getId(), leaderId, "안녕 나랑 같이 팀할래?");
-        MessageCreateDto messageCreateDto2 = new MessageCreateDto(room.getId(), leaderId, "시간 날때 연락줘");
+        MessageCreateDto messageCreateDto2 = new MessageCreateDto(room.getId(), senderId, "오키 콜 함 가보던가");
+        MessageCreateDto messageCreateDto3 = new MessageCreateDto(room.getId(), senderId, "좋아 우린 팀이야 내가 팀장이야");
+        MessageCreateDto messageCreateDto4 = new MessageCreateDto(room.getId(), senderId, "내가 부하야");
         messageService.makeMessage(messageCreateDto1);
         messageService.makeMessage(messageCreateDto2);
+        messageService.makeMessage(messageCreateDto3);
+        messageService.makeMessage(messageCreateDto4);
     }
 }

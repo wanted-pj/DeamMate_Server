@@ -51,14 +51,14 @@ public class PostingController {
 
     // 포스트 Id를 전달받아서 posting 수정하기
     @PutMapping("/posting/{postingId}")
-    public Long updatePosting(@PathVariable Long postingId, @RequestBody PostingUpdateDto postingUpdateDto) {
+    public Posting updatePosting(@PathVariable Long postingId, @RequestBody PostingUpdateDto postingUpdateDto) {
         return postingService.update(postingId, postingUpdateDto);
     }
 
     // 포스트 Id를 전달받아서 posting checkRecruiting 만 수정하기
     @PutMapping("/posting/recruiting/{postingId}")
-    public Posting updatePosting(@PathVariable Long postingId, @RequestBody Map<String, Boolean> map) {
-        return postingService.updateRecruiting(postingId, map.get("checkRecruiting"));
+    public Posting updatePosting(@PathVariable Long postingId) {
+        return postingService.updateRecruiting(postingId);
     }
 
     // 포스팅아이디를 전달받아서 포스팅 삭제하기
