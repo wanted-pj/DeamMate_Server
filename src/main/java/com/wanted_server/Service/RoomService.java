@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -22,6 +24,23 @@ public class RoomService {
         // 방은 하나, 사람은 둘
         Personal sender = personalRepository.findOne(senderId);
         Personal receiver = personalRepository.findOne(receiverId);
+
+        boolean check = false;
+        for (Participant senderParticipant : sender.getParticipants()) {
+            Long sendRoomId = senderParticipant.getRoom().getId();
+            for (Participant receiverParticipant : receiver.getParticipants()) {
+                if (sendRoomId == receiverParticipant.getRoom().getId()) {
+                    check = true;
+                }
+            }
+        }
+
+        // 이미 채팅방 있음
+        if (check) {
+            throw new IllegalStateException("이미 존재하는 채팅방입니다.");
+        }
+
+        // 방이 없으면 만듬
         Room room = Room.createRoom();
         Room save = roomRepository.save(room);
 
@@ -39,4 +58,5 @@ public class RoomService {
 
         return save;
     }
+
 }
