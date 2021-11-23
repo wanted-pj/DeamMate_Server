@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class Posting {
         this.checkRecruiting = true;
 
         // 시간은 나중에 설정
-        this.postingTime = LocalDateTime.now();
+        this.postingTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
     public void update(PostingUpdateDto postingUpdateDto) {
@@ -72,7 +73,7 @@ public class Posting {
         this.endTime = postingUpdateDto.getEndTime();
 
         // 업데이트 시간으로 시간 설정
-        this.postingTime = LocalDateTime.now();
+        this.postingTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
     // 포스팅을 만들 때, 사람과 관계 설정

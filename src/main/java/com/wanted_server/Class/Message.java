@@ -10,7 +10,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.TimeZone;
 
 @Getter
 @NoArgsConstructor
@@ -46,7 +50,7 @@ public class Message {
     public Message(MessageCreateDto messageCreateDto){
         this.content = messageCreateDto.getContent();
         this.senderId = messageCreateDto.getSenderId();
-        this.messagingTime = LocalDateTime.now();
+        this.messagingTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         // 읽었는지는 나중에 설정(처음은 무조건 아직 안읽음)
         this.readCheck = false;
 
