@@ -42,6 +42,14 @@ public class PersonalService {
         }
     }
 
+    // 회원 중복 조회
+    public void validateNicknameDuplicateException(String nickname) {
+        List<Personal> findPersonal = personalRepository.findByNickname(nickname);
+        if (!findPersonal.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        }
+    }
+
     // 회원 전체 조회
     public List<NotRoomTeamInfoPersonalDto> findPersonals() {
         List<Personal> personals = personalRepository.findAll();

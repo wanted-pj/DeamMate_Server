@@ -1,9 +1,10 @@
 package com.wanted_server.Controller;
 
-import com.wanted_server.Class.Evaluation;
 import com.wanted_server.Class.Personal;
-import com.wanted_server.Class.Posting;
-import com.wanted_server.Dto.*;
+import com.wanted_server.Dto.NotRoomTeamInfoPersonalDto;
+import com.wanted_server.Dto.PersonalChatDto;
+import com.wanted_server.Dto.PersonalJoinDto;
+import com.wanted_server.Dto.PersonalUpdateDto;
 import com.wanted_server.Repository.EvaluationRepository;
 import com.wanted_server.Repository.PersonalRepository;
 import com.wanted_server.Service.EvaluationService;
@@ -11,9 +12,7 @@ import com.wanted_server.Service.PersonalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -45,6 +44,12 @@ public class PersonalController {
     @GetMapping("/personal/stringId/{stringId}")
     public void getPersonalsByStringId(@PathVariable String stringId) {
         personalService.validateDuplicateException(stringId);
+    }
+
+    // nickname 으로 아이디 중복 검사 조회
+    @GetMapping("/personal/nickname/{nickname}")
+    public void getPersonalsByNickname(@PathVariable String nickname) {
+        personalService.validateNicknameDuplicateException(nickname);
     }
 
     // 회원 생성

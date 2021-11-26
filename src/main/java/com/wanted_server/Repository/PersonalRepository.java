@@ -28,6 +28,12 @@ public class PersonalRepository  {
                 .getResultList();
     }
 
+    public List<Personal> findByNickname(String nickname) {
+        return em.createQuery("select p from Personal p where p.nickname = :nickname", Personal.class)
+                .setParameter("nickname", nickname)
+                .getResultList();
+    }
+
     public List<Personal> findAll() {
         return em.createQuery("select p from Personal p", Personal.class)
                 .getResultList();
