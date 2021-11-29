@@ -89,9 +89,6 @@ public class Personal {
     }
 
     public void update(PersonalUpdateDto personalUpdateDto) {
-        this.stringId = personalUpdateDto.stringId;
-        this.pwd = personalUpdateDto.pwd;
-        this.nickname = personalUpdateDto.nickname;
         this.img = personalUpdateDto.img;
         this.school = personalUpdateDto.school;
         this.major = personalUpdateDto.major;

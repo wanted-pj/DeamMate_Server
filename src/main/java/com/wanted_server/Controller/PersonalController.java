@@ -1,5 +1,6 @@
 package com.wanted_server.Controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.wanted_server.Class.Personal;
 import com.wanted_server.Dto.NotRoomTeamInfoPersonalDto;
 import com.wanted_server.Dto.PersonalChatDto;
@@ -12,7 +13,9 @@ import com.wanted_server.Service.PersonalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -64,8 +67,11 @@ public class PersonalController {
 
     // 회원 수정
     @PutMapping("/personal/{personalId}")
-    public Long updatePersonal(@PathVariable Long personalId, @RequestBody PersonalUpdateDto personalUpdateDto) {
-        return personalService.update(personalId, personalUpdateDto);
+    public Map updatePersonal(@PathVariable Long personalId, @RequestBody PersonalUpdateDto personalUpdateDto) {
+        Long updateId = personalService.update(personalId, personalUpdateDto);
+        Map map = new HashMap();
+        map.put("updateId", updateId);
+        return map;
     }
 
     // 회원 삭제

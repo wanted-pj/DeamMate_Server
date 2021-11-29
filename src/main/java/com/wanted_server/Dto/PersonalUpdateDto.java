@@ -8,9 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PersonalUpdateDto {
-    public String stringId;
-    public String pwd;
-    public String nickname;
     public String img;
     public String school;
     public String major;
@@ -20,10 +17,7 @@ public class PersonalUpdateDto {
     public String address;
     public String career;
 
-    public PersonalUpdateDto(String stringId, String pwd, String nickname, String img, String school, String major, int grade, int age, int gender, String address, String career) {
-        this.stringId = stringId;
-        this.pwd = pwd;
-        this.nickname = nickname;
+    public PersonalUpdateDto(String img, String school, String major, int grade, int age, int gender, String address, String career) {
         this.img = img;
         this.school = school;
         this.major = major;
