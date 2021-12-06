@@ -32,6 +32,12 @@ dependencies {
 
     implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 
+    // 테스트를 위한 AssertJ 추가
+    implementation "org.assertj:assertj-core:3.12.2"
+
+    // json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'dev.miku:r2dbc-mysql'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -43,6 +49,7 @@ dependencies {
     testCompileOnly 'junit:junit:4.13'
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
 }
+
 
 test {
     useJUnitPlatform()
