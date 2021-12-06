@@ -70,37 +70,37 @@ public class AllServiceTest {
         personalService.join(personal4);
         personalService.join(personal5);
 
-        // 회원 한명이 posting 올림
-        PostingCreateDto postingCreateDto = new PostingCreateDto("[긴급]Wanted 해커톤 프로잭트에 참가하실 개발자를 구합니다 !", "2021.11월 14일마감인 원티드 해커톤 프로잭트에 참가하실 개발자분을 모십니다. 개발을 못해도 성실히 배워서 수행할 수 있는 분을 찾습니다. 많이 많이 지원해주세요 !", Category.공모전, "원티드 해커톤 우승팀", LocalDateTime.now());
-        Posting posting = new Posting(postingCreateDto);
-        Long postingId = postingService.make(posting, leaderId);
-        System.out.println("여기: " + posting);
-
-        // 회원 한명이 Connect를 보냄
-        Connect connect = new Connect();
-        connectService.make(connect, postingId, senderId);
-
-        // 팀 수락
-        connectService.updateResult(connect.getId());
-        // - 팀 생성
-        Team team1 = teamService.makeTeam(postingId);
-        System.out.println("여기: " + team1);
-        // - 팀 조인
-        Team team = teamService.joinTeam(connect.getId());
-        System.out.println("여기: " + team);
-        // 회원 한명이 채팅 시작을 위해 "쪽지하기"를 누름. => 방생성
-        Room room = roomService.makeRoom(leaderId, senderId);
-        System.out.println("room.getId() = " + room.getId());
-
-        // when
-        // 한명이 쪽지를 보냄
-        MessageCreateDto messageCreateDto1 = new MessageCreateDto(room.getId(), leaderId, "안녕하세요 혹시 팀 아직 모집하시나요?");
-        MessageCreateDto messageCreateDto2 = new MessageCreateDto(room.getId(), senderId, "네 아직 모집중에 있습니다 !");
-        MessageCreateDto messageCreateDto3 = new MessageCreateDto(room.getId(), leaderId, "저는 개발직군에 들어가고 싶습니다 !");
-        MessageCreateDto messageCreateDto4 = new MessageCreateDto(room.getId(), senderId, "넵 한번 팀원과 상의해보겠습니다 ㅎㅎ");
-        messageService.makeMessage(messageCreateDto1);
-        messageService.makeMessage(messageCreateDto2);
-        messageService.makeMessage(messageCreateDto3);
-        messageService.makeMessage(messageCreateDto4);
+//        // 회원 한명이 posting 올림
+//        PostingCreateDto postingCreateDto = new PostingCreateDto("[긴급]Wanted 해커톤 프로잭트에 참가하실 개발자를 구합니다 !", "2021.11월 14일마감인 원티드 해커톤 프로잭트에 참가하실 개발자분을 모십니다. 개발을 못해도 성실히 배워서 수행할 수 있는 분을 찾습니다. 많이 많이 지원해주세요 !", Category.공모전, "원티드 해커톤 우승팀", LocalDateTime.now());
+//        Posting posting = new Posting(postingCreateDto);
+//        Long postingId = postingService.make(posting, leaderId);
+//        System.out.println("여기: " + posting);
+//
+//        // 회원 한명이 Connect를 보냄
+//        Connect connect = new Connect();
+//        connectService.make(connect, postingId, senderId);
+//
+//        // 팀 수락
+//        connectService.updateResult(connect.getId());
+//        // - 팀 생성
+//        Team team1 = teamService.makeTeam(postingId);
+//        System.out.println("여기: " + team1);
+//        // - 팀 조인
+//        Team team = teamService.joinTeam(connect.getId());
+//        System.out.println("여기: " + team);
+//        // 회원 한명이 채팅 시작을 위해 "쪽지하기"를 누름. => 방생성
+//        Room room = roomService.makeRoom(leaderId, senderId);
+//        System.out.println("room.getId() = " + room.getId());
+//
+//        // when
+//        // 한명이 쪽지를 보냄
+//        MessageCreateDto messageCreateDto1 = new MessageCreateDto(room.getId(), leaderId, "안녕하세요 혹시 팀 아직 모집하시나요?");
+//        MessageCreateDto messageCreateDto2 = new MessageCreateDto(room.getId(), senderId, "네 아직 모집중에 있습니다 !");
+//        MessageCreateDto messageCreateDto3 = new MessageCreateDto(room.getId(), leaderId, "저는 개발직군에 들어가고 싶습니다 !");
+//        MessageCreateDto messageCreateDto4 = new MessageCreateDto(room.getId(), senderId, "넵 한번 팀원과 상의해보겠습니다 ㅎㅎ");
+//        messageService.makeMessage(messageCreateDto1);
+//        messageService.makeMessage(messageCreateDto2);
+//        messageService.makeMessage(messageCreateDto3);
+//        messageService.makeMessage(messageCreateDto4);
     }
 }

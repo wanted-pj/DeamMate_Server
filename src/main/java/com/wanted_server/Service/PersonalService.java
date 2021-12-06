@@ -27,6 +27,7 @@ public class PersonalService {
     @Transactional
     public Long join(Personal personal) {
         validateDuplicateException(personal.getStringId());
+        validateNicknameDuplicateException(personal.getNickname());
         Evaluation evaluation = evaluationService.initEvaluation();
         personal.setEvaluation(evaluation);
         personalRepository.save(personal);
@@ -38,7 +39,7 @@ public class PersonalService {
     public void validateDuplicateException(String stringId) {
         List<Personal> findPersonal = personalRepository.findByStringId(stringId);
         if (!findPersonal.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new IllegalStateException("이미 존재하는 ID 입니다.");
         }
     }
 
@@ -46,7 +47,7 @@ public class PersonalService {
     public void validateNicknameDuplicateException(String nickname) {
         List<Personal> findPersonal = personalRepository.findByNickname(nickname);
         if (!findPersonal.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new IllegalStateException("이미 존재하는 Nickname 입니다.");
         }
     }
 
@@ -78,7 +79,6 @@ public class PersonalService {
                     personal.getAddress(),
                     postings
             );
-            System.out.println("여기: " + notRoomTeamInfoPersonalDto.getId());
             dtoAll.add(notRoomTeamInfoPersonalDto);
         }
         return dtoAll;
@@ -112,7 +112,7 @@ public class PersonalService {
                     participantInPersonalDto.setNickname(theOther.getNickname());
 
                     List<Message> messages = temp.getRoom().getMessages();
-                    if(messages != null && !messages.isEmpty()){
+                    if (messages != null && !messages.isEmpty()) {
                         participantInPersonalDto.setLastMessageTime(messages.get(messages.size() - 1).getMessagingTime());
                     }
                 }
