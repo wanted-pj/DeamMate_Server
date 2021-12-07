@@ -89,6 +89,15 @@ public class PersonalService {
         return personalRepository.findOne(id);
     }
 
+    // Id로 조회ㅏ
+    public Personal findByStringId(String stringId) {
+        List<Personal> findPersonal = personalRepository.findByStringId(stringId);
+        if (findPersonal.isEmpty()) {
+            throw new IllegalStateException("존재하지 않는 stringId 입니다.");
+        }
+        return findPersonal.get(0);
+    }
+
     // 채팅 내역 조회
     public PersonalChatDto getChatPersonal(Long id) {
         Personal personal = personalRepository.findOne(id);

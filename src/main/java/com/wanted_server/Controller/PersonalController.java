@@ -37,6 +37,12 @@ public class PersonalController {
         return personalService.findOne(id);
     }
 
+    // stringId로 로그인 정보 조회
+    @GetMapping("/personal/login/{stringId}")
+    public Personal getLoginPersonal(@PathVariable String stringId) {
+        return personalService.findByStringId(stringId);
+    }
+
     // 채팅ListFragment 들어왔을 때
     @GetMapping("/personal/chat/{id}")
     public PersonalChatDto getChatPersonal(@PathVariable Long id) {
