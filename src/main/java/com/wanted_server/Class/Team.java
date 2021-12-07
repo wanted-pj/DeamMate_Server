@@ -26,7 +26,7 @@ public class Team {
     @Column(nullable = false)
     private Long leaderId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "posting_id")
     @JsonIgnore
     private Posting posting;
